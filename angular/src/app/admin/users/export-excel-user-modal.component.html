@@ -1,0 +1,65 @@
+<div
+    appBsModal
+    #exportExcelModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exportExcelModal"
+    aria-hidden="true"
+    [config]="{ backdrop: 'static', keyboard: !saving }"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>
+                        {{ 'ChooseColumnsForExcelExport' | localize }}
+                    </span>
+                </h4>
+                <button
+                    type="button"
+                    class="btn-close"
+                    (click)="close()"
+                    [attr.aria-label]="l('Close')"
+                    [disabled]="saving"
+                >
+                </button>
+            </div>
+            <form *ngIf="active" [formGroup]="form" novalidate (ngSubmit)="selectColumns()" autocomplete="off">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between">
+                        <h2>{{ 'Columns' | localize }}</h2>
+                        <button type="button" #btnToggleAll (click)="toggleClick()" class="btn btn-primary btn-sm mb-5">{{ toggleAllBtnText }}</button>
+                    </div>
+                    <div formArrayName="selectedColumns">
+                        <div class="form-check mb-3" *ngFor="let column of this.selectedColumnsList; index as i">
+                            <input (change)="selectedColumnChange()" class="form-check-input" [formControlName]="i" [id]="'column' + i" type="checkbox"/>
+                            <label class="form-check-label" for="column{{i}}">
+                                {{ column }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        [disabled]="saving"
+                        type="button"
+                        class="btn btn-light-primary fw-bold"
+                        (click)="close()"
+                    >
+                        {{ 'Cancel' | localize }}
+                    </button>
+                    <button
+                        type="submit"
+                        class="btn btn-primary fw-bold"
+                        [buttonBusy]="saving"
+                        [busyText]="l('SavingWithThreeDot')"
+                    >
+                        <i class="fa fa-save"></i>
+                        <span>{{ 'ExportExcel' | localize }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

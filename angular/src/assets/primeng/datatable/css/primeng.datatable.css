@@ -1,0 +1,23 @@
+html[data-bs-theme=dark] .p-datatable .p-datatable-tbody > tr > td,
+html[data-bs-theme=dark] .p-datatable .p-datatable-thead > tr > th,
+html[data-bs-theme=dark] .p-paginator,
+html[data-bs-theme=dark] .p-dropdown,
+html[data-bs-theme=dark] .p-dropdown-panel{
+    background-color: var(--bs-body-bg);       
+   }
+
+   html[data-bs-theme=dark] .p-datatable .p-datatable-tbody > tr > td,
+   html[data-bs-theme=dark] .p-datatable .p-datatable-thead > tr > th{
+    border-bottom: 1px dashed var(--bs-gray-300);
+   }
+
+   .p-datatable .p-datatable-tbody > tr > td,
+   .p-datatable .p-datatable-thead > tr > th{
+     border-bottom: 1px dashed #e4e4e4;
+   }
+
+   .primeng-no-data{
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+   }

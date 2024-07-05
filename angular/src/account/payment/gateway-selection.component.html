@@ -1,0 +1,45 @@
+<div class="login-form" [@routerTransition]>
+    <input type="hidden" name="PaymentId" value="@Model.Payment.Id" />
+    <div class="pb-5 pt-lg-0 pt-5">
+        <h3 class="fw-bolder text-dark fs-4 fs-1-lg pb-10">{{ 'PaymentInfo' | localize }}</h3>
+        <div class="d-flex justify-content-between" *ngFor="let product of payment.subscriptionPaymentProducts">
+            <span>{{ product.count }} x {{ product.description }}</span>
+            <span>{{ appSession.application.currencySign }}{{ product.amount * product.count | number:'.2' }}</span>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="d-flex justify-content-between">
+        <span>
+            {{ 'Total' | localize }}
+        </span>
+        <span>
+            {{ appSession.application.currencySign }}{{ payment.totalAmount | number:'.2' }}
+        </span>
+    </div>
+
+    <div class="mb-5 mt-5" *ngIf="supportsRecurringPayments">
+        <label class="form-check form-check-custom form-check-solid">
+            <input
+                type="checkbox"
+                name="RecurringPaymentEnabled"
+                [(ngModel)]="recurringPaymentEnabled"
+                class="form-check-input"
+            />
+            <span class="form-check-label">
+                {{ 'AutomaticallyBillMyAccount' | localize }}
+            </span>
+        </label>
+    </div>
+
+    <div *ngFor="let paymentGateway of paymentGateways" class="mb-2">
+        <button
+            *ngIf="paymentGateway.supportsRecurringPayments || !recurringPaymentEnabled"
+            (click)="checkout(paymentGateway.gatewayType)"
+            class="btn btn-success w-100"
+        >
+            {{ 'CheckoutWith' + getPaymentGatewayType(paymentGateway.gatewayType) | localize }}
+        </button>
+    </div>
+</div>

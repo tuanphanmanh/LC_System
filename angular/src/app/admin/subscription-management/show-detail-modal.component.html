@@ -1,0 +1,46 @@
+<div
+    appBsModal
+    #showDetailModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="showDetailModal"
+    aria-hidden="true"
+    [config]="{ backdrop: 'static'}"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{ 'Detail' | localize }}</span>
+                </h4>
+                <button
+                    type="button"
+                    class="btn-close"
+                    (click)="close()"
+                    [attr.aria-label]="l('Close')"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-rounded table-striped border gy-7 gs-7">
+                    <thead>
+                    <tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+                        <th>#</th>
+                        <th>{{'Item' | localize}}</th>
+                        <th>{{'Amount' | localize}}</th>
+                        <th>{{'TotalAmount' | localize}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products">
+                            <td>{{product.count}}</td>
+                            <td>{{product.description}}</td>
+                            <td>{{appSession.application.currencySign}}{{product.amount | number: '.2'}}</td>
+                            <td>{{appSession.application.currencySign}}{{product.count * product.amount | number: '.2'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

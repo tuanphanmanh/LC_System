@@ -1,0 +1,40 @@
+<div class="login-form" [@routerTransition]>
+    <div class="pb-13 pt-lg-0 pt-5">
+        <h3 class="fw-bolder text-dark fs-4 fs-1-lg">
+            {{'Purchase' | localize}}
+        </h3>
+    </div>
+    <div class="form-actions">
+        <div class="d-flex justify-content-between" *ngFor="let product of payment.subscriptionPaymentProducts">
+            <span>
+                {{product.count}} x {{product.description}}
+            </span>
+            <span>
+                {{ appSession.application.currencySign }}{{product.count * product.amount | number: '.2'}}
+            </span>
+        </div>
+        <hr class="border-green"/>
+        <div class="mb-5 row">
+            <label class="col-sm-4 form-label">{{'Price' | localize}}</label>
+            <div class="col-sm-8 text-end">
+                <p class="form-control-static text-bold" id="totalPrice">
+                    {{ appSession.application.currencySign }}{{payment.totalAmount | number:'.2'}}
+                </p>
+            </div>
+        </div>
+        <div class="mb-5 row" *ngIf="payment.isRecurring && payment.isProrationPayment">
+            <label class="col-sm-12 form-label">{{'RecurringSubscriptionUpgradeNote' | localize}}</label>
+        </div>
+        <div class="mb-5 row" *ngIf="payment.isRecurring && !payment.isProrationPayment">
+            <div class="col-sm-12 text-end">
+                <p class="form-control-static text-bold" id="totalPrice">
+                    {{'AutomaticBilling' | localize}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <button id="stripe-checkout" class="btn btn-primary btn-block" [disabled]="stripeIsLoading">
+        {{'Purchase' | localize}}
+    </button>
+    <div [busyIf]="stripeIsLoading" *ngIf="stripeIsLoading"></div>
+</div>
