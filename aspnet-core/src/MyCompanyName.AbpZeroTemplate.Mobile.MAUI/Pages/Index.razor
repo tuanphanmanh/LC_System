@@ -1,0 +1,16 @@
+﻿@page "/"
+@using MyCompanyName.AbpZeroTemplate.Core.Dependency
+@inherits AbpZeroTemplateMainLayoutPageComponentBase
+
+<div class="card">
+    <div class="card-body">
+        INDEX
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        DependencyResolver.Resolve<INavigationService>().NavigateTo(NavigationUrlConsts.User);
+    }
+}
