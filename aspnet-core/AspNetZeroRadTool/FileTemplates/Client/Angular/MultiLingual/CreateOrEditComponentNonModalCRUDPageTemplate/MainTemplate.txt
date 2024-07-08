@@ -1,0 +1,153 @@
+﻿import { Component, ViewChild, Injector, Output, EventEmitter, OnInit, ElementRef} from '@angular/core';
+{{Import_Modal_Directive_Here}}
+import { finalize } from 'rxjs/operators';
+import { {{Entity_Name_Plural_Here}}ServiceProxy, CreateOrEdit{{Entity_Name_Here}}Dto, LanguageServiceProxy, ApplicationLanguageListDto, Get{{Entity_Name_Here}}ForEditOutput {{NP_Looped_Import_Dropdown_LookupTableDto_Here}}} from '@shared/service-proxies/service-proxies';
+import { AppComponentBase } from '@shared/common/app-component-base';
+{{Import_Datetime_Here}}{{NP_Looped_Lookup_Component_Import_Here}}
+import { ActivatedRoute, Router } from '@angular/router';
+import { appModuleAnimation } from '@shared/animations/routerTransition';
+import {Observable} from "@node_modules/rxjs";
+{{Import_Breadcrumb_Here}}
+{{Import_DateTime_Service_Here}}
+{{Import_File_Uploader_Here}}
+{{Import_HttpClient}}
+{{NP_Import_PrimeNG_AutoComplete}}
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { filter as _filter } from 'lodash-es';
+
+@Component({
+    templateUrl: './create-or-edit-{{entity_Name_Here}}.component.html',
+    animations: [appModuleAnimation()]
+})
+export class CreateOrEdit{{Entity_Name_Here}}Component extends AppComponentBase implements OnInit {
+    active = false;
+    saving = false;
+    {{NP_TYPEAHEAD_PROPERTIES_HERE}}
+
+    form: FormGroup;
+    languages: ApplicationLanguageListDto[];
+    defaultLanguage: string;
+    selectedLanguage: string;    placeholder: string;
+    initialValues: any;
+
+    {{NP_Looped_ViewChild_Here}}
+    {{entity_Name_Here}}: CreateOrEdit{{Entity_Name_Here}}Dto = new CreateOrEdit{{Entity_Name_Here}}Dto();
+{{Property_Nullable_Datetime_Dec_Looped_Template_Here}}
+{{NP_Looped_Display_Declaration_Here}}
+{{NP_Looped_Dropdown_Property_Here}}
+{{Breadcrumb_Definitions_Here}}
+{{File_Property_Looped_Definition_Here}}
+
+    constructor(
+        injector: Injector,
+        private _activatedRoute: ActivatedRoute,  
+        private fb: FormBuilder,
+        private _languageService: LanguageServiceProxy,      
+        private _{{entity_Name_Plural_Here}}ServiceProxy: {{Entity_Name_Plural_Here}}ServiceProxy,
+        private _router: Router{{Get_DateTime_Service_Here}}{{Add_Token_Service_Here}}{{Define_HttpClient_In_Constructor}}
+    ) {
+        super(injector);
+    }
+
+    ngOnInit(): void {
+        {{Get_File_Prop_Accepted_Types_On_Init}}
+
+        this._languageService.getLanguages().subscribe((result) => {
+            this.defaultLanguage = result.defaultLanguageName;
+            this.selectedLanguage = this.defaultLanguage;
+            this.languages = result.items;
+
+            this.languages = this.languages.map((l) => {
+
+                if (l.name === this.defaultLanguage) {
+                    l.displayName = `${l.displayName} (${this.l('DefaultLanguageName')})`;
+                }
+
+                return l;
+            });
+
+            this.form = this.fb.group({
+                translations: this.fb.array(this.languages.map(l => this.fb.group({
+                    language: l.name,
+                    id: [],
+                    {{Multi_Lingual_Looped_Property_Here}}
+                }))),
+                {{Non_Multi_Lingual_Looped_Property_Here}}
+                id: []
+            });
+
+            this.initialValues = this.form.value;
+            this.show(this._activatedRoute.snapshot.queryParams['id']);
+        });
+    }
+
+    changeLanguage(language: string): void {
+        this.selectedLanguage = language;
+    }
+
+    getFormGroup(language: string){
+        const translations = this.form.get('translations') as FormArray;
+        const index = translations.controls.findIndex(c => c.get('language').value === language);
+        const group = translations.at(index) as FormGroup;
+        return group;
+    }
+
+    show({{entity_Name_Here}}Id?: {{Primary_Key_Type_Here}}): void {
+{{Property_Nullable_Datetime_SetNull_Looped_Template_Here}}
+
+        this.form.reset(this.initialValues);
+        this.form.enable();
+
+        if (!{{entity_Name_Here}}Id) {
+{{NP_Looped_Display_Init_Here}}
+{{Set_File_Property_Null_Here}}
+            this.active = true;
+        } else {
+            this._{{entity_Name_Plural_Here}}ServiceProxy.get{{Entity_Name_Here}}ForEdit({{entity_Name_Here}}Id).subscribe(( {{{entity_Name_Here}}{{File_Name_Results}} } = {} as Get{{Entity_Name_Here}}ForEditOutput) => {        
+                {{Date_Properties_Set_Here}}
+                this.form.patchValue({...{{entity_Name_Here}}{{Date_Properties_Patch_Here}}});
+                {{Set_File_Property_Here}}
+                this.active = true;
+            });
+        }
+        {{NP_Looped_Dropdown_GetAll_Here}}
+         {{Init_File_Uploader_Here}}
+    }
+    
+    save(): void {
+        this.saving = true;
+        {{Property_Nullable_Datetime_GetValue_Looped_Template_Here}}
+        this._{{entity_Name_Plural_Here}}ServiceProxy.createOrEdit(this.form.value as CreateOrEdit{{Entity_Name_Here}}Dto)
+            .pipe(finalize(() => { this.saving = false;}))
+            .subscribe(() => {
+            this.notify.info(this.l('SavedSuccessfully'));
+        });
+    }
+    
+    saveAndNew(): void {
+        this.saving = true;
+        {{Property_Nullable_Datetime_GetValue_Looped_Template_Here}}
+        this._{{entity_Name_Plural_Here}}ServiceProxy.createOrEdit(this.form.value as CreateOrEdit{{Entity_Name_Here}}Dto)
+            .pipe(finalize(() => { this.saving = false;}))
+            .subscribe(() => {
+            this.notify.info(this.l('SavedSuccessfully'));
+        });
+    }
+
+{{NP_Looped_OpenModal_Here}}
+
+{{NP_Typeahead_Filter_Here}}
+
+{{NP_Typeahead_Get_All_Here}}
+
+{{NP_Looped_SetNull_Here}}
+
+{{NP_Looped_GetNew_Here}}
+
+{{Init_File_Properties_Functions_Here}}
+
+{{File_Upload_Initializer_Func_Here}}
+
+{{Get_Download_Url_Here}}
+
+}

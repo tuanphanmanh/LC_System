@@ -1,0 +1,16 @@
+﻿using System;
+using System.Threading.Tasks;
+using Abp.Application.Services;
+using Abp.Application.Services.Dto;
+using {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}.Dtos;
+using {{Namespace_Here}}.Dto;
+{{NP_Using_Looped_Template_Here}}
+
+namespace {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}
+{
+    public interface I{{Entity_Name_Plural_Here}}AppServiceExtended 
+    {
+        // Write your custom code here. 
+		// ASP.NET Zero Power Tools will not overwrite this class when you regenerate the related entity.
+    }
+}

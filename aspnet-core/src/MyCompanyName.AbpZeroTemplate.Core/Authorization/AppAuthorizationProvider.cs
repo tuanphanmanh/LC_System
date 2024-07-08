@@ -124,12 +124,31 @@ namespace MyCompanyName.AbpZeroTemplate.Authorization
             administration.CreateChildPermission(AppPermissions.Pages_Administration_HangfireDashboard, L("HangfireDashboard"), multiTenancySides: _isMultiTenancyEnabled ? MultiTenancySides.Host : MultiTenancySides.Tenant);
             administration.CreateChildPermission(AppPermissions.Pages_Administration_Host_Dashboard, L("Dashboard"), multiTenancySides: MultiTenancySides.Host);
             
+            // MASTER
              var MasterData = context.GetPermissionOrNull(AppPermissions.MasterData) ?? context.CreatePermission(AppPermissions.MasterData, L("MasterData"));
-
+            //CATEGORY
             var MasterCategory = MasterData.CreateChildPermission(AppPermissions.MasterCategory, L("MasterCategory"));
             MasterCategory.CreateChildPermission(AppPermissions.MasterCategory_Search, L("Search"));
             MasterCategory.CreateChildPermission(AppPermissions.MasterCategory_CreateOrEdit, L("CreateOrEdit"));
             MasterCategory.CreateChildPermission(AppPermissions.MasterCategory_Delete, L("Delete"));
+
+            //CERTIFICATE
+            var MasterCertificate = MasterData.CreateChildPermission(AppPermissions.MasterCertificate, L("MasterCertificate"));
+            MasterCertificate.CreateChildPermission(AppPermissions.MasterCertificate_Search, L("Search"));
+            MasterCertificate.CreateChildPermission(AppPermissions.MasterCertificate_CreateOrEdit, L("CreateOrEdit"));
+            MasterCertificate.CreateChildPermission(AppPermissions.MasterCertificate_Delete, L("Delete"));
+
+            //Contract
+            var MasterContract = MasterData.CreateChildPermission(AppPermissions.MasterContract, L("MasterContract"));
+            MasterContract.CreateChildPermission(AppPermissions.MasterContract_Search, L("Search"));
+            MasterContract.CreateChildPermission(AppPermissions.MasterContract_CreateOrEdit, L("CreateOrEdit"));
+            MasterContract.CreateChildPermission(AppPermissions.MasterContract_Delete, L("Delete"));
+
+            //Document
+            var MasterDocument = MasterData.CreateChildPermission(AppPermissions.MasterDocument, L("MasterDocument"));
+            MasterDocument.CreateChildPermission(AppPermissions.MasterDocument_Search, L("Search"));
+            MasterDocument.CreateChildPermission(AppPermissions.MasterDocument_CreateOrEdit, L("CreateOrEdit"));
+            MasterDocument.CreateChildPermission(AppPermissions.MasterDocument_Delete, L("Delete"));
         }
 
         private static ILocalizableString L(string name)

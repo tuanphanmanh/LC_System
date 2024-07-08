@@ -1,0 +1,32 @@
+﻿@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Detail"))
+
+@model List<MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.SubscriptionManagement.ShowDetailModalViewModel>
+
+<div class="modal-body">
+    <table class="table table-rounded table-striped border gy-7 gs-7">
+        <thead>
+        <tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+            <th>#</th>
+            <th>@L("Item")</th>
+            <th>@L("Amount")</th>
+            <th>@L("TotalAmount")</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Count</td>
+                <td>@product.Description</td>
+                <td>@($"{AbpZeroTemplateConsts.CurrencySign}{(product.Amount):N2}")</td>
+                <td>@($"{AbpZeroTemplateConsts.CurrencySign}{(product.GetTotalAmount()):N2}")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

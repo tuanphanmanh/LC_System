@@ -1,0 +1,41 @@
+{
+"propertyTemplates":[
+		{
+			"placeholder" : "{{File_Typed_Prop_File_Name_Property_Here}}",
+			"condition" : "{{Property_CreateOrEdit_Here}} == true",
+			"templates" : [
+					{
+					"type" : "file",
+					"content" : "public string {{Property_Name_Here}}FileName { get; set; }
+		
+		"
+					}
+				]
+		}
+	],
+"navigationPropertyTemplates":[
+		{
+			"placeholder" : "{{NP_Looped_Display_Property_Here}}",
+			"templates" : [
+					{
+					"relation" : "single",
+					"content" : "		public string {{NP_Foreign_Entity_Name_Here}}{{NP_Display_Property_Name_Here}}{{NP_Duplication_Number_Here}} { get; set;}
+
+"
+					}
+				]
+		}
+	],
+"conditionalTemplates":[
+		{
+            "placeholder": "{{Overridable_Entity_Base_Here}}",
+            "condition": "{{Generate_Overridable_Entity_Here}} == true",
+            "content": "Base"
+        },
+        {
+            "placeholder": "{{Overridable_Entity_Abstract_Here}}",
+            "condition": "{{Generate_Overridable_Entity_Here}} == true",
+            "content": " abstract"
+        }
+	]	
+}

@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,6 +47,7 @@ using MyCompanyName.AbpZeroTemplate.MultiTenancy;
 using MyCompanyName.AbpZeroTemplate.Net.Emailing;
 using MyCompanyName.AbpZeroTemplate.Notifications;
 using MyCompanyName.AbpZeroTemplate.WebHooks;
+using MyCompanyName.AbpZeroTemplate.Net.Sms;
 
 namespace MyCompanyName.AbpZeroTemplate
 {
@@ -95,7 +96,7 @@ namespace MyCompanyName.AbpZeroTemplate
             //Configuration.Modules.ZeroLdap().Enable(typeof(AppLdapAuthenticationSource));
 
             //Twilio - Enable this line to activate Twilio SMS integration
-            //Configuration.ReplaceService<ISmsSender,TwilioSmsSender>();
+            Configuration.ReplaceService<ISmsSender,TwilioSmsSender>();
 
             //Adding DynamicEntityParameters definition providers
             Configuration.DynamicEntityProperties.Providers.Add<AppDynamicEntityPropertyDefinitionProvider>();

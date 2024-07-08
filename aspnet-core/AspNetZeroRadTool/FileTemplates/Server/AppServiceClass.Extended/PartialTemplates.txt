@@ -1,0 +1,85 @@
+{
+"navigationPropertyTemplates":[
+		{
+			"placeholder" : "{{NP_Looped_Ctor_Parameter_Here}}",
+			"templates" : [
+					{
+					"relation" : "single",
+					"preventDuplicate" : true,
+					"content" : ", IRepository<{{NP_Foreign_Entity_Name_Here}}, {{NP_Id_Type_Here}}> lookup_{{nP_Foreign_Entity_Name_Here}}Repository"
+					}
+				]
+		},
+		{
+			"placeholder" : "{{NP_Looped_Ctor_Parameter_To_Base_Class_Here}}",
+			"templates" : [
+					{
+					"relation" : "single",
+					"preventDuplicate" : true,
+					"content" : ", lookup_{{nP_Foreign_Entity_Name_Here}}Repository"
+					}
+				]
+		},
+		{
+			"placeholder" : "{{NP_Using_Looped_Template_Here}}",
+			"preventDuplicate":true,
+			"templates" : [
+					{
+					"relation" : "single",
+					"content" : "using {{NP_Namespace_Here}};
+"
+					},
+					{
+					"relation" : "multi",
+					"content" : "using {{NP_Namespace_Here}};
+"
+					},
+					{
+					"relation" : "single",
+					"viewType": "Dropdown",						
+					"preventDuplicate":true,
+					"content" : "using {{NP_Namespace_Here}};
+"
+					},
+				]
+		}		
+	],
+"conditionalTemplates":[
+		{
+			"placeholder": "{{Primary_Key_With_Comma_Here}}",
+			"condition": "{{Primary_Key_Here}} != 'int'",
+			"content": ", {{Primary_Key_Here}}"
+		},				
+		{
+			"placeholder": "{{Excel_Constructor_Parameter_Here}}",
+			"condition": "{{Create_Excel_Export_Here}} == true",
+			"content": ", I{{Entity_Name_Plural_Here}}ExcelExporter {{entity_Name_Plural_Here}}ExcelExporter"
+		},
+        {
+            "placeholder": "{{Excel_Constructor_Parameter_To_Base_Class_Here}}",
+            "condition": "{{Create_Excel_Export_Here}} == true",
+            "content": ", {{entity_Name_Plural_Here}}ExcelExporter"
+        },		
+		{
+			"placeholder": "{{File_Prop_Ctor_Parameters_Here}}",
+			"condition": "{{Has_File_Prop}} == true && {{Project_Version_Here}} >= 100300",
+			"content": ", ITempFileCacheManager tempFileCacheManager, IBinaryObjectManager binaryObjectManager"
+		},
+		{
+			"placeholder": "{{File_Prop_Ctor_Parameters_To_Base_Class_Here}}",
+			"condition": "{{Has_File_Prop}} == true && {{Project_Version_Here}} >= 100300",
+			"content": ", tempFileCacheManager, binaryObjectManager"
+		},
+        {
+            "placeholder": "{{Excel_Using_Statement_Here}}",
+            "condition": "{{Create_Excel_Export_Here}} == true",
+            "content": "
+ using {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}.Exporting;"
+        },
+		{
+            "placeholder": "{{Extended_AppService_Interface_Here}}",
+            "condition": "{{Generate_Overridable_Entity_Here}} == true",
+            "content": ",I{{Entity_Name_Plural_Here}}AppServiceExtended"
+        }     
+	],
+}

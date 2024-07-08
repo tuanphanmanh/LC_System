@@ -1,0 +1,6 @@
+{
+	"path" : "{{Namespace_Here}}.Application.Shared\\{{Namespace_Relative_Full_Reverse_Slash_Here}}\\Dtos\\{{Entity_Name_Here}}{{NP_Foreign_Entity_Name_Here}}LookupTableDto.Extended.cs",
+	"condition": "{{Is_Master_Detail_Page_Child_Here}} == false && {{Generate_Overridable_Entity_Here}} == true",
+	"foreach":"navigationProperty",
+	"generationType": "SkipIfExists"
+}

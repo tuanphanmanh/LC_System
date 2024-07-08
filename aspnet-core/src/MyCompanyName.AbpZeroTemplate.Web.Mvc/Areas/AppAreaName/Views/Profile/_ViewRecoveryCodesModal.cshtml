@@ -1,0 +1,35 @@
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ViewRecoveryCodes")))
+
+<div class="modal-body">    
+    <form name="AuthenticatorVerificationModalForm">
+        <div class="mb-5">
+            <div  id="inputDiv" class="mb-5">
+                <label for="authenticatorCode" class="form-label required">@L("YourAuthenticatorCode")</label>
+                <input id="authenticatorCode" class="form-control edited" type="text" name="Code" required maxlength="6" minlength="6">
+            </div>
+        </div>
+        <button id="verifyButton" class="btn btn-primary">@L("Verify")</button>
+    </form>
+    <div class="card" id="recoveryCodesCard" style="display:none">
+        <div class="card-body pt-0 col-md-6 mx-auto">
+            <div id="recoveryCodes" class="bg-light p-5">
+        </div> 
+        <div class="mt-4 text-end">
+            <button id="btnDownload" type="button" class="btn btn-primary btn-sm me-1">
+                <i class="fa-solid fa-download"></i>
+                <span>
+                    @L("Download")
+                    </span>
+            </button>
+            <button id="btnCopy" type="button" class="btn btn-secondary btn-sm">
+                <i class="fa-solid fa-copy"></i>
+                <span>
+                    @L("Copy")
+                </span>
+            </button>
+        </div>
+    </div>
+    </div>
+</div>

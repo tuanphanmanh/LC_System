@@ -1,0 +1,78 @@
+﻿@using Abp.Notifications
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@model MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Notifications.CreateMassNotificationViewModel
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewMassNotification")))
+
+<div class="modal-body">
+    <div>
+        <form name="MassNotificationForm" role="form" novalidate class="form-validation">
+            <div class="my-3">
+                <label class="form-label" for="UserName">@L("User")</label>
+                <div class="input-group">
+                    <input class="form-control" id="UserName" name="userName" type="text" disabled>
+                    <button class="btn btn-primary blue" id="OpenUserLookupTableButton" type="button">
+                        <i class="fa fa-search"></i> @L("Search")
+                    </button>
+                    <button class="btn btn-danger btn-icon" type="button" id="ClearUserNameButton">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="CreateMassNotificationModal_OrganizationUnitDisplayName">@L("OrganizationUnit")</label>
+                <div class="input-group">
+                    <input class="form-control" id="CreateMassNotificationModal_OrganizationUnitDisplayName" name="organizationUnitDisplayName" type="text" disabled>
+                    <button class="btn btn-primary blue" id="OpenOrganizationUnitLookupTableButton" type="button">
+                        <i class="fa fa-search"></i> @L("Search")
+                    </button>
+                    <button class="btn btn-danger btn-icon" type="button" id="ClearOrganizationUnitDisplayNameButton">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            @{
+                var selectListSeverity = Html.GetEnumSelectList(typeof(NotificationSeverity));
+                foreach (var selectOption in selectListSeverity)
+                {
+                    selectOption.Text = L("Enum_NotificationSeverity_" + selectOption.Value);
+                }
+            }
+            <div class="my-3">
+                <label class="form-label" for="CreateMassNotificationModal_Severity">@L("Severity")*</label>
+                <select class="form-select m-input m-input--square" name="severity" id="CreateMassNotificationModal_Severity" asp-for="@Model.Severity" asp-items="@selectListSeverity">
+                </select>
+            </div>
+            @{
+                var targetNotifierList = new List<SelectListItem>();
+
+                foreach (var targetNotifier in Model.TargetNotifiers)
+                {
+                    targetNotifierList.Add(new SelectListItem(L(targetNotifier), targetNotifier));
+                }
+            }
+            <div class="my-3">
+                <label class="form-label" for="CreateMassNotificationModal_TargetNotifiers">@L("TargetNotifiers")*</label>
+                <select class="form-select m-input m-input--square" name="targetNotifier" id="CreateMassNotificationModal_TargetNotifiers" asp-for="@Model.TargetNotifiers" asp-items="@targetNotifierList">
+                </select>
+                @if (Model.TargetNotifiers.Contains("MyCompanyName.AbpZeroTemplate.Notifications.SmsRealTimeNotifier"))
+                {
+                    <small id="targetNotifierSmsLengthInfo" class="form-text text-muted">@L("NotificationTargetNotifierSmsLengthInfo")</small>
+                }
+            </div>
+
+            <div class="my-3">
+                <label class="form-label required" for="CreateMassNotificationModal_Message">@L("Message")*</label>
+                <textarea required class="form-control" rows="3" id="CreateMassNotificationModal_Message" name="message"></textarea>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-light-primary font-weight-bold close-button" data-bs-dismiss="modal">@L("Cancel")</button>
+    <button type="button" class="btn btn-primary save-button"><i class="fa fa-save"></i> <span>@L("SendMassNotification")</span></button>
+</div>

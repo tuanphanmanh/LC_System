@@ -1,0 +1,8 @@
+﻿namespace {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}.Dtos
+{
+    public class Get{{Entity_Name_Here}}ForViewDto : Get{{Entity_Name_Here}}ForViewDtoBase
+    {
+        // Write your custom code here. 
+        // ASP.NET Zero Power Tools will not overwrite this class when you regenerate the related entity.        
+    }
+}

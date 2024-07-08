@@ -1,0 +1,144 @@
+﻿@using Abp.UI.Inputs
+@using Microsoft.AspNetCore.Html
+@using MyCompanyName.AbpZeroTemplate
+@using MyCompanyName.AbpZeroTemplate.Editions
+@using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments
+@model MyCompanyName.AbpZeroTemplate.Web.Models.TenantRegistration.EditionsSelectViewModel
+@{
+    ViewBag.DisableTenantChange = true;
+    Layout = "_Layout";
+}
+
+@section Styles
+{
+    <link href="~/view-resources/Views/TenantRegistration/SelectEdition.css" rel="stylesheet" asp-append-version="true"/>
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/view-resources/Views/TenantRegistration/SelectEdition.js" asp-append-version="true"></script>
+}
+
+<div class="@(await GetContainerClass())">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <div class="row text-center mt-10 mb-0 pricing-items">
+                <div class="w-100" style="text-align: -webkit-center;">
+                    <div class="nav bg-light rounded-pill px-3 py-2 ms-9 mb-15 w-225px" data-kt-buttons="true">
+                        <!--begin::Nav link-->
+                        <button class="nav-link btn btn-active btn-active-dark fw-bold btn-color-gray-600 py-3 px-5 m-1 rounded-pill active" data-kt-plan="monthly">
+                            @L("Monthly")
+                        </button>
+                        <!--end::Nav link-->
+
+                        <!--begin::Nav link-->
+                        <button class="nav-link btn btn-active btn-active-dark fw-bold btn-color-gray-600 py-3 px-5 m-1 rounded-pill" data-kt-plan="annual">
+                            @L("Annual")
+                        </button>
+                        <!--end::Nav link-->
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-10 mb-0 pricing-items">
+                @foreach (var editionsWithFeatures in Model.EditionsWithFeatures)
+                {
+                    <div class="col-xl-4">
+                        <div class="d-flex h-100 align-items-center">
+                            <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10 mb-10">
+                                <div class="mb-7 text-center">
+                                    <h1 class="text-gray-900 mb-5 fw-bolder">
+                                        @editionsWithFeatures.Edition.DisplayName    
+                                    </h1>
+                                    <div class="text-center">
+                                        @RenderEditionPrice(editionsWithFeatures.Edition.MonthlyPrice, "monthly")
+                                        @RenderEditionPrice(editionsWithFeatures.Edition.AnnualPrice, "annual")
+                                    </div>
+                                </div>
+                                <div class="w-100 mb-10">
+                                    @foreach (var feature in Model.AllFeatures.OrderBy(f =>
+                                              {
+                                                  var featureValue = editionsWithFeatures.FeatureValues.FirstOrDefault(fv => fv.Name == f.Name);
+                                                  return (f.Description + featureValue.Value).Length;
+                                              }))
+                                    {
+                                        var featureValue = editionsWithFeatures.FeatureValues.FirstOrDefault(f => f.Name == feature.Name);
+
+                                        <div class="d-flex align-items-center mb-5">
+                                            <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3">
+                                                @feature.DisplayName
+                                            </span>
+                                            @if (feature.InputType.GetType() == typeof(CheckboxInputType))
+                                            {
+                                                @if (featureValue.Value == "true")
+                                                {
+                                                    <i class="far fa-check-circle text-success fs-1"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="far fa-times-circle text-muted fs-1"></i>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span class="text-success text-left">
+                                                    @Html.Raw(featureValue.Value)
+                                                </span>
+                                            }
+                                        </div>
+                                    }
+
+                                </div>
+                                <div>
+                                    @if (editionsWithFeatures.Edition.IsFree)
+                                    {
+                                        <a class="btn btn-success btn-sm me-2 mb-2" href="@Url.Action("Register", "TenantRegistration", new {editionId = editionsWithFeatures.Edition.Id, subscriptionStartType = SubscriptionStartType.Free})">
+                                            @L("GetStarted")
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        if (editionsWithFeatures.Edition.TrialDayCount.HasValue)
+                                        {
+                                            <a class="btn btn-warning btn-sm me-2 mb-2" href="@Url.Action("Register", "TenantRegistration", new {editionId = editionsWithFeatures.Edition.Id, subscriptionStartType = SubscriptionStartType.Trial})">
+                                                @L("FreeTrial")
+                                            </a>
+                                        }
+
+                                        <a class="btn btn-primary btn-sm me-2 mb-2 buy-now" href="@Url.Action("Register", "TenantRegistration", new {editionId = editionsWithFeatures.Edition.Id, subscriptionStartType = SubscriptionStartType.Paid, paymentPeriodType = PaymentPeriodType.Monthly})">
+                                            @L("BuyNow")
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+
+    private IHtmlContent RenderEditionPrice(decimal? price, string priceType)
+    {
+        if (price.HasValue)
+        {
+            return Html.Raw("<div class=\"text-center\" data-price-type=\"" + priceType + "\">" +
+                            "<span class=\"mb-2 text-primary\">" + AbpZeroTemplateConsts.CurrencySign + "</span>" +
+                            "<span class=\"fs-3x fw-bold text-primary\">" +
+                            "<text>" + price.Value.ToString("N2") + "</text>" +
+                            "</span>" +
+                            "</div>"
+            );
+        }
+
+        return Html.Raw("<div class=\"text-center\" data-price-type=\"" + priceType + "\">" +
+                        "<span class=\"fs-3x fw-bold text-primary\">" +
+                        "<text>" + L("Free") + "</text>" +
+                        "</span>" +
+                        "</div>"
+        );
+    }
+
+}

@@ -1,0 +1,27 @@
+{
+"navigationPropertyTemplates":[
+		{
+			"placeholder" : "{{Navigation_Property_Looped_Template_Here}}",
+			"templates" : [
+					{
+					"relation" : "single",
+					"content" : "		public string {{NP_Foreign_Entity_Name_Here}}{{NP_Display_Property_Name_Here}}{{NP_Duplication_Number_Here}} { get; set;}
+
+"
+					}
+				]
+		}
+	],
+"conditionalTemplates":[
+		{
+            "placeholder": "{{Overridable_Entity_Base_Here}}",
+            "condition": "{{Generate_Overridable_Entity_Here}} == true",
+            "content": "Base"
+        },
+        {
+            "placeholder": "{{Overridable_Entity_Abstract_Here}}",
+            "condition": "{{Generate_Overridable_Entity_Here}} == true",
+            "content": " abstract"
+        }
+	]	
+}

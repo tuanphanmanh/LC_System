@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp" Version="9.1.1" />
     <PackageReference Include="Abp.Zero.Common" Version="9.1.1" />
+    <PackageReference Include="EPPlus" Version="7.2.1" />
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+    <PackageReference Include="EPPlus.Interfaces" Version="6.1.1" />
+    <PackageReference Include="NPOI.Template" Version="1.2.0" />
   </ItemGroup>
 
 </Project>

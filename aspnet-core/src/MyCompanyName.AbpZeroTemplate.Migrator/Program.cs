@@ -45,12 +45,13 @@ namespace MyCompanyName.AbpZeroTemplate.Migrator
         {
             if (args.IsNullOrEmpty())
             {
-                return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => {
-                webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
-                webBuilder.UseIISIntegration();
-                webBuilder.UseStartup<Abp.Configuration.Startup>();
-                });
+                return;
+                //Host.CreateDefaultBuilder(args)
+                //.ConfigureWebHostDefaults(webBuilder => {
+                //webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                //webBuilder.UseIISIntegration();
+                //webBuilder.UseStartup<Abp.Configuration.Startup>();
+                //});
             }
 
             foreach (var arg in args)

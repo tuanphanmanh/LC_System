@@ -1,0 +1,8 @@
+﻿@using Abp.Timing
+@model MyCompanyName.AbpZeroTemplate.Web.Views.Shared.Components.AccountLogo.AccountLogoViewModel
+@{
+    var theme = await GetTheme();
+}
+<a href="~/" class="d-flex justify-content-center mb-10 mb-12">
+    <img src="@Model.GetLogoUrl(ApplicationPath, theme.BaseSettings.Layout.DarkMode ? "dark" : "light")&t=@Clock.Now.Ticks.ToString()" alt="" class="h-40px"/>
+</a>

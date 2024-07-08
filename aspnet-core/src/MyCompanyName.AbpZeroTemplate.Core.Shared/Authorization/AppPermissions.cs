@@ -108,9 +108,28 @@
         //MASTER
         public const string MasterData = "MasterData";
 
+        // Category
         public const string MasterCategory = "MasterData.MasterCategory";
         public const string MasterCategory_Search = "MasterData.MasterCategory.Search";
         public const string MasterCategory_CreateOrEdit = "MasterData.MasterCategory.CreateOrEdit";
         public const string MasterCategory_Delete = "MasterData.MasterCategory.Delete";
+
+        // Certificate
+        public const string MasterCertificate = "MasterData.MasterCertificate";
+        public const string MasterCertificate_Search = "MasterData.MasterCertificate.Search";
+        public const string MasterCertificate_CreateOrEdit = "MasterData.MasterCertificate.CreateOrEdit";
+        public const string MasterCertificate_Delete = "MasterData.MasterCertificate.Delete";
+
+        // Contract
+        public const string MasterContract = "MasterData.MasterContract";
+        public const string MasterContract_Search = "MasterData.MasterContract.Search";
+        public const string MasterContract_CreateOrEdit = "MasterData.MasterContract.CreateOrEdit";
+        public const string MasterContract_Delete = "MasterData.MasterContract.Delete";
+
+        // Document
+        public const string MasterDocument = "MasterData.MasterDocument";
+        public const string MasterDocument_Search = "MasterData.MasterDocument.Search";
+        public const string MasterDocument_CreateOrEdit = "MasterData.MasterDocument.CreateOrEdit";
+        public const string MasterDocument_Delete = "MasterData.MasterDocument.Delete";
     }
 }

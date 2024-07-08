@@ -36,7 +36,6 @@ namespace MyCompanyName.AbpZeroTemplate.Timing
                     selectedEdition.IsSelected = true;
                 }
             }
-
             return timeZoneItems;
         }
 

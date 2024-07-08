@@ -1,0 +1,84 @@
+﻿@import "../mobile-header.less";
+@import "../cookie-consent.less";
+@import "../quick-nav.less";
+
+.unread-chat-message-count {
+  position: absolute;
+  top: 20px;
+}
+
+.unread-notification-count {
+  position: absolute;
+  top: -10px;
+  right: 0px;
+}
+
+@media (min-width: 992px) {
+  .header .header-bottom {
+    height: auto;
+  }
+}
+
+#kt_header {
+  .topbar-item {
+    margin-right: .50rem !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .searchMenuTop {
+    display: block !important;
+  }
+
+  .searchMenuBottom {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .searchMenuTop {
+    display: none !important;
+  }
+
+  .searchMenuBottom {
+    display: block !important;
+  }
+}
+
+.searchMenuTop {
+    margin:15px !important;
+}
+
+.aside-enabled .wrapper
+{
+    padding-right: 0px !important;
+}
+
+body:not(.dark-mode) {
+    background-image: url("/metronic/themes/theme12/images/page-bg.jpg");
+}
+
+#kt_header .topbar-item {
+  margin-right:0 !important;
+}
+
+.menu-item .menu-link .menu-title {
+    flex-grow: inherit;
+}
+
+.aside-enabled.header-fixed[data-kt-sticky-header=on] .header{
+    right: 0px;
+}
+
+#ActiveUserDelegationsCombobox{
+    max-width: 120px;
+}
+
+div.page-title span.text-muted,
+div.footer span.text-muted{
+  color: #5E6278 !important;
+}
+
+.menu-link{
+  flex: 1;
+}

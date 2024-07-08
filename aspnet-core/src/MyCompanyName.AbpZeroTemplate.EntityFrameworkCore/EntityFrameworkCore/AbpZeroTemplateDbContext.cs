@@ -19,6 +19,7 @@ using MyCompanyName.AbpZeroTemplate.OpenIddict.Tokens;
 using MyCompanyName.AbpZeroTemplate.Storage;
 using MyCompanyName.AbpZeroTemplate.EntityFrameworkCore;
 using MyCompanyName.AbpZeroTemplate.Master;
+using Abp.Configuration;
 
 namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
 {
@@ -53,7 +54,11 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
         public virtual DbSet<RecentPassword> RecentPasswords { get; set; }
 
         // master
-        public virtual DbSet<MstLCCategory> MstLCCategories { get; set; }
+        public virtual DbSet<MstLCCategory> MstLCCategory { get; set; }
+        public virtual DbSet<MstLCCertificate> MstLCCertificate { get; set; }
+        public virtual DbSet<MstLCContract> MstLCContract { get; set; }
+        public virtual DbSet<MstLCDocument> MstLCDocument { get; set; }
+        public virtual DbSet<MstLCDocument> MstLCDocumentDetail { get; set; }
 
         public AbpZeroTemplateDbContext(DbContextOptions<AbpZeroTemplateDbContext> options)
             : base(options)

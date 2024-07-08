@@ -1,0 +1,15 @@
+﻿@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("DisableAuthenticatorApp")))
+
+<div class="modal-body">    
+    <form name="RemoveAuthenticatorModalForm">
+        <div class="mb-5">
+            <div  id="inputDiv" class="mb-5">
+                <label for="authenticatorCode" class="form-label">@L("YourAuthenticatorCode")</label>
+                <input id="authenticatorCode" class="form-control edited" type="text" name="Code" maxlength="8" minlength="6">
+            </div>
+        </div>
+        <button id="verifyButton" class="btn btn-primary">@L("DisableAuthenticatorApp")</button>
+    </form>
+</div>

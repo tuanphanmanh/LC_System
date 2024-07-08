@@ -1,0 +1,74 @@
+@using MyCompanyName.AbpZeroTemplate
+@model MyCompanyName.AbpZeroTemplate.Web.Models.Payment.GatewaySelectionViewModel
+
+@{
+    Layout = "~/Views/Account/_Layout.cshtml";
+    ViewBag.DisableTenantChange = true;
+}
+
+@section Scripts
+{
+    <script abp-src="/view-resources/Views/Payment/GatewaySelection.js" asp-append-version="true"></script>
+}
+
+@section Styles
+{
+    <link abp-href="/view-resources/Views/Payment/Payment.css" rel="stylesheet" type="text/css" asp-append-version="true"/>
+}
+
+<div class="login-form">
+    <input type="hidden" name="PaymentId" value="@Model.Payment.Id"/>
+    <div class="pb-5 pt-lg-0 pt-5">
+        <h3 class="fw-bolder text-dark fs-4 fs-1-lg pb-10">@L("PaymentInfo")</h3>
+        @foreach (var product in Model.Payment.SubscriptionPaymentProducts)
+        {
+            <div class="d-flex justify-content-between">
+                <span>
+                    @product.Count x @product.Description
+                </span>
+                <span>
+                    @AbpZeroTemplateConsts.CurrencySign@product.GetTotalAmount().ToString("N2")
+                </span>
+            </div>
+        }
+    </div>
+    <div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">
+                <i class="fa fa-exclamation-triangle"></i> @ViewBag.ErrorMessage
+            </div>
+        }
+    </div>
+
+    <hr/>
+
+    <div class="d-flex justify-content-between">
+        <span>
+            @L("Total")
+        </span>
+        <span>
+            @AbpZeroTemplateConsts.CurrencySign@Model.Payment.TotalAmount.ToString("N2")
+        </span>
+    </div>
+
+    @if (Model.AllowRecurringPaymentOption())
+    {
+        <div class="mb-5 mt-5">
+            <label class="form-check form-check-custom form-check-solid">
+                <input type="checkbox" name="RecurringPaymentEnabled" class="form-check-input" value="true"/>
+                <span class="form-check-label">
+                    @L("AutomaticallyBillMyAccount")
+                </span>
+            </label>
+        </div>
+    }
+
+    @foreach (var paymentGateway in Model.PaymentGateways)
+    {
+        <div class="mb-5 mt-5">
+            <button data-gateway="@paymentGateway.GatewayType" data-supports-subscription="@paymentGateway.SupportsRecurringPayments.ToString().ToLower()" class="btn btn-success w-100 checkout">@L("CheckoutWith" + paymentGateway.GatewayType)</button>
+        </div>
+    }
+
+</div>

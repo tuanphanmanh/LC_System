@@ -8,7 +8,7 @@
     AbpAntiForgeryManager.SetCookie(Context);
 }
 <head>
-    <title>AbpZeroTemplate</title>
+    <title>LC System</title>
 
     <link href="~/view-resources/Views/Ui/Login.css" rel="stylesheet" asp-append-version="true"/>
 </head>
@@ -40,7 +40,7 @@
                 @L("RememberMe")
             </label>
         </div>
-        <button type="submit" class="login-form-button">@L("LogIn")</button>
+        <button type="submit" class="login-form-button" style="border-radius: 20px">@L("LogIn")</button>
     </form>
     <span style="font-size: 0.8em;font-style:italic"> v@(AppVersionHelper.Version) [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]</span>
 </div>

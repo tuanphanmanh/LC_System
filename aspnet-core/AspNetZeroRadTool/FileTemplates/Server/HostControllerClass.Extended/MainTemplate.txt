@@ -1,0 +1,18 @@
+﻿using System;
+using System.IO;
+using System.Linq;
+using Abp.IO.Extensions;
+using Abp.UI;
+using Abp.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using {{Namespace_Here}}.Storage;
+
+namespace {{Namespace_Here}}.Web.Controllers
+{
+    [Authorize]
+    public class {{Entity_Name_Plural_Here}}Controller : {{Entity_Name_Plural_Here}}ControllerBase
+    {
+        // Write your custom code here. 
+        // ASP.NET Zero Power Tools will not overwrite this class when you regenerate the related entity.
+    }
+}

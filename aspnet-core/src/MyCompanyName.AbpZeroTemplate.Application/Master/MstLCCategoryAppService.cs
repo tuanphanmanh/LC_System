@@ -39,7 +39,6 @@ namespace MyCompanyName.AbpZeroTemplate.Master
                          };
 
             var pagedAndFilteredInfo = result.PageBy(input);
-           // int totalCount = await result.CountAsync();
             return new PagedResultDto<SearchCatagoryOutputDto>(
                        result.Count(),
                        pagedAndFilteredInfo.ToList()
@@ -52,7 +51,7 @@ namespace MyCompanyName.AbpZeroTemplate.Master
         {
             var CategoryCheck = _categoryRepo.GetAll().Where(p => p.Name.Equals(dto.Name)).FirstOrDefault();
 
-            if (dto.Id == 0)  // create New
+            if (dto.Id == 0 || dto.Id.ToString() == "null")  // create New
             {
                 if (CategoryCheck == null)
                 {
@@ -62,7 +61,7 @@ namespace MyCompanyName.AbpZeroTemplate.Master
                 }
                 else
                 {
-                    throw new UserFriendlyException("Category Code Duplicate");
+                    throw new UserFriendlyException("Category that already exist, create another category!");
                 }
             }
             else // update 
@@ -81,13 +80,11 @@ namespace MyCompanyName.AbpZeroTemplate.Master
 
             }
         }
-
         [HttpDelete]
         [AbpAuthorize(AppPermissions.MasterCategory_Delete)]
         public async Task Delete(long id)
         {
             await _categoryRepo.DeleteAsync(id);
         }
-
     }
 }

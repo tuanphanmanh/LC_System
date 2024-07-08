@@ -1,0 +1,214 @@
+﻿@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using MyCompanyName.AbpZeroTemplate.Authorization.Users.Profile.Dto;
+
+@model GenerateGoogleAuthenticatorKeyOutput
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(@L("TwoFactorAuthentication")))
+
+<style>
+    .completed-check{
+        display:block!important;
+    }
+
+    .stepper-item.current .completed-check{
+        color: #fff;
+    }
+</style>
+
+<div class="modal-body">
+<div>
+<!--begin::Stepper-->
+<div class="stepper stepper-pills stepper-column d-flex flex-column flex-lg-row" id="two_factor_stepper">
+<!--begin::Aside-->
+<div class="d-flex flex-row-auto w-100 w-lg-300px">
+    <!--begin::Nav-->
+    <div class="stepper-nav flex-start">
+        <!--begin::Step 1-->
+        <div class="stepper-item current me-5" data-kt-stepper-element="nav">
+            <!--begin::Wrapper-->
+            <div class="stepper-wrapper d-flex align-items-center">
+                <!--begin::Icon-->
+                <div class="stepper-icon w-40px h-40px">
+                    <i class="stepper-check fas fa-check"></i>
+                    <span class="stepper-number">1</span>
+                </div>
+                <!--end::Icon-->
+
+                <!--begin::Label-->
+                <div class="stepper-label">
+                    <h3 class="stepper-title">
+                        @L("AuthenticatorAppTitle")
+                    </h3>
+                </div>
+                <!--end::Label-->
+            </div>
+            <!--end::Wrapper-->
+
+            <!--begin::Line-->
+            <div class="stepper-line h-40px"></div>
+            <!--end::Line-->
+        </div>
+        <!--end::Step 1-->
+
+        <!--begin::Step 2-->
+        <div class="stepper-item me-5" data-kt-stepper-element="nav">
+            <!--begin::Wrapper-->
+            <div class="stepper-wrapper d-flex align-items-center">
+                <!--begin::Icon-->
+                <div class="stepper-icon w-40px h-40px">
+                    <i class="stepper-check fas fa-check"></i>
+                    <span class="stepper-number">2</span>
+                </div>
+                <!--begin::Icon-->
+
+                <!--begin::Label-->
+                <div class="stepper-label">
+                    <h3 class="stepper-title">
+                        @L("SaveRecoveryCodesTitle")
+                    </h3>
+                </div>
+                <!--end::Label-->
+            </div>
+            <!--end::Wrapper-->
+
+            <!--begin::Line-->
+            <div class="stepper-line h-40px"></div>
+            <!--end::Line-->
+        </div>
+        <!--end::Step 2-->
+
+        <!--begin::Step 3-->
+        <div class="stepper-item me-5" data-kt-stepper-element="nav">
+            <!--begin::Wrapper-->
+            <div class="stepper-wrapper d-flex align-items-center">
+                <!--begin::Icon-->
+                <div class="stepper-icon w-40px h-40px">
+                    <i class="stepper-check fas fa-check completed-check"></i>
+                </div>
+                <!--begin::Icon-->
+
+                <!--begin::Label-->
+                <div class="stepper-label">
+                    <h3 class="stepper-title">
+                        @L("AuthenticatorAppEnabled")
+                    </h3>
+                </div>
+                <!--end::Label-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Step 3-->
+    </div>
+    <!--end::Nav-->
+</div>
+
+<!--begin::Content-->
+<div class="flex-row-fluid">
+    <!--begin::Form-->
+    <form class="form mx-auto" novalidate="novalidate" name="AuthenticationForm">
+        <!--begin::Group-->
+        <div class="mb-5">
+            <!--begin::Step 1-->
+            <div class="flex-column current" data-kt-stepper-element="content">
+
+                <div class="google-authenticator-enable">
+                    <div class="text-center mb-">
+                        @Html.HiddenFor(x => x.GoogleAuthenticatorKey)
+                        <img src="@Model.QrCodeSetupImageUrl" alt="qr-code"/>
+                    </div>
+                    <div class="col-md-8 mx-auto">
+                      <div class="text-bold text-center">
+                            @L("AuthenticatorAppScan")
+                        </div>
+                        <small>
+                            @L("AuthenticatorAppScanHelp")
+                        </small>
+                        <input id="authenticationCode" class="form-control form-control-sm mt-5" required/>
+                    </div>
+                </div>
+
+            </div>
+            <!--begin::Step 1-->
+
+            <!--begin::Step 2-->
+            <div class="flex-column" data-kt-stepper-element="content">
+                
+                <div class="card">
+
+                <div class="card-body pt-0">
+                    <h3 class="card-label">
+                        @L("SaveRecoveryCodesTitle")
+                    </h3>
+                    <div id="recoveryCodes" class="bg-light p-5">
+                    </div> 
+                    <div class="mt-4 text-end">
+                        <button id="btnDownload" type="button" class="btn btn-primary btn-sm me-1">
+                            <i class="fa-solid fa-download"></i>
+                            <span>
+                                @L("Download")
+                                </span>
+                        </button>
+                        <button id="btnCopy" type="button" class="btn btn-secondary btn-sm">
+                            <i class="fa-solid fa-copy"></i>
+                            <span>
+                                @L("Copy")
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                </div>
+                
+            </div>
+            <!--begin::Step 1-->
+
+            <!--begin::Step 1-->
+            <div class="flex-column" data-kt-stepper-element="content">
+                <div class="alert alert-success" role="alert">
+                    <div class="text-center mb-5">
+                        <i class="bi bi-shield-check display-6 text-success"></i>
+                    </div>
+                    <div class="text-dark">
+                        <h4 class="alert-heading text-center">
+                            @L("AuthenticatorAppEnabled")
+                            @* Two-factor authentication activated successfully! *@
+                        </h4>
+                            @L("AuthenticatorAppEnabledHelp")
+                            @* The next time you log in, you will be asked to enter a code from your authenticator app. *@
+                    </div>
+                </div>
+            </div>
+            <!--begin::Step 1-->
+        </div>
+        <!--end::Group-->
+
+        <!--begin::Actions-->
+        <div class="d-flex flex-stack justify-content-end">
+            <!--begin::Wrapper-->
+            <div>
+                <button type="button" id="btnContinue" disabled class="btn btn-primary btn-sm" data-kt-stepper-action="next">
+                    <span class="indicator-label">
+                        @L("Continue")
+                        @* Continue *@
+                    </span>
+                    <span class="indicator-progress">
+                        @L("PleaseWait")
+                        @* Please wait...  *@
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                </button>
+                <button id="btnDone" type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal" aria-hidden="true" data-kt-stepper-action="submit">
+                @L("Done")
+                </button>
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Actions-->
+    </form>
+    <!--end::Form-->
+</div>
+</div>
+<!--end::Stepper-->
+</div>
+
+</div>

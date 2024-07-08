@@ -1,0 +1,21 @@
+﻿{{NP_Using_Looped_Template_Here}}
+using Abp.Domain.Repositories;{{Excel_Using_Statement_Here}}
+using {{Namespace_Here}}.Authorization;
+using Abp.Authorization;
+using {{Namespace_Here}}.Storage;
+
+namespace {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}
+{
+	[AbpAuthorize(AppPermissions.{{Permission_Name_Here}})]
+    public class {{Entity_Name_Plural_Here}}AppService : {{Entity_Name_Plural_Here}}AppServiceBase, I{{Entity_Name_Plural_Here}}AppService {{Extended_AppService_Interface_Here}}
+    {		
+		  public {{Entity_Name_Plural_Here}}AppService(IRepository<{{Entity_Name_Here}}{{Primary_Key_With_Comma_Here}}> {{entity_Name_Here}}Repository{{Excel_Constructor_Parameter_Here}}{{NP_Looped_Ctor_Parameter_Here}}{{File_Prop_Ctor_Parameters_Here}}) 
+		  : base({{entity_Name_Here}}Repository{{Excel_Constructor_Parameter_To_Base_Class_Here}}{{NP_Looped_Ctor_Parameter_To_Base_Class_Here}}{{File_Prop_Ctor_Parameters_To_Base_Class_Here}}
+		  )
+		  {
+		  }
+		  
+          // Write your custom code here. 
+		  // ASP.NET Zero Power Tools will not overwrite this class when you regenerate the related entity.
+    }
+}

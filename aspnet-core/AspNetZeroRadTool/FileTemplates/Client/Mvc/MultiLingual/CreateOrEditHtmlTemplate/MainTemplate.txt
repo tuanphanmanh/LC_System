@@ -1,0 +1,52 @@
+﻿{{Enum_Using_Looped_Template_Here}}
+@using System.Globalization
+@using {{Namespace_Here}}.Web.Areas.{{App_Area_Name_Here}}.Models.Common.Modals
+@using {{Namespace_Here}}.Web.Areas.{{App_Area_Name_Here}}.Models.{{Entity_Name_Plural_Here}}
+@model {{Master_Detail_Child_Prefix_Here}}CreateOrEdit{{Entity_Name_Here}}ModalViewModel
+@using Abp.Extensions
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+
+@{
+    var modalTitle = Model.IsEditMode ? (L("EditMultiLingualEntity")) : L("CreateNewMultiLingualEntity");
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">
+        <span>@modalTitle</span>
+    </h5>
+    <select class="form-select w-50" id="languageCheckbox">
+        <option selected value="@Model.DefaultLanguage.Name">@Model.DefaultLanguage.DisplayName (DefaultLanguage)</option>
+        @foreach (var item in Model.Languages.Where(language => language.Name != Model.DefaultLanguage.Name))
+        {
+            <option value="@item.Name">@item.DisplayName</option>
+        }
+    </select>
+</div>
+
+<div class="modal-body">
+        <div id="{{Entity_Name_Here}}InformationsTab">
+            <form name="{{Entity_Name_Here}}InformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.{{Entity_Name_Here}}.Id" />
+                    <script>            
+                    @Html.Raw("window.translationsData = " + JsonConvert.SerializeObject(Model.{{Entity_Name_Here}}.Translations, new JsonSerializerSettings
+                        {
+                            ContractResolver = new CamelCasePropertyNamesContractResolver()
+                        })) 
+                    </script>
+                }
+
+				{{NP_Looped_Template_Before_V110000_Here}}
+                {{NP_Looped_Template_After_V110000_Here}}
+				{{Property_Looped_Template_Before_V110000_Here}}
+                {{Property_Looped_Template_After_V110000_Here}}
+                {{Property_Looped_Multi_Lingual_Here}}
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/{{App_Area_Name_Here}}/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

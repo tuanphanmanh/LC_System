@@ -8,7 +8,7 @@ namespace MyCompanyName.AbpZeroTemplate.Tenants.Dashboard
     {
         private const string DateFormat = "yyyy-MM-dd";
         private static readonly Random Random;
-        public static string[] CountryNames = { "Argentina", "China", "France", "Italy", "Japan", "Netherlands", "Russia", "Spain", "Turkey", "United States"};
+        public static string[] CountryNames = { "Argentina", "China", "France", "Italy", "Japan", "Netherlands", "Russia", "Spain", "Turkey", "United States", "Vietnamese"};
 
         static DashboardRandomDataGenerator()
         {

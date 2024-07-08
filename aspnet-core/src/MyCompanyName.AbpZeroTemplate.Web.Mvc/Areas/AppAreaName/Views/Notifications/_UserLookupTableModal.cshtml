@@ -1,0 +1,39 @@
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate.Web.TagHelpers
+
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/Notifications/_UserLookupTableModal.js" asp-append-version="true"></script>
+}
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("SearchUser")))
+
+<div class="modal-body">
+    <div class="form">
+        <div class="row align-items-center mb-4">
+            <div class="col-xl-12">
+                <div class="form-group align-items-center">
+                    <div class="input-group">
+                        <input type="text" id="UserTableFilter" class="form-control m-input" placeholder='@L("SearchWithThreeDot")'>
+                        <span class="input-group-btn">
+                            <button id="GetUserButton" class="btn btn-primary" type="submit">
+                                <i class="flaticon-search-1"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <table id="UserTable" class="table align-middle table-row-dashed fs-6 gy-5 dataTable dtr-inline no-footer">
+            <thead>
+            <tr>
+                <th>@L("Select")</th>
+                <th>@L("Name")</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

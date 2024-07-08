@@ -24,9 +24,9 @@ export class AppNavigationService {
             new AppMenuItem('Tenants', 'Pages.Tenants', 'flaticon-list-3', '/app/admin/tenants'),
             new AppMenuItem('UserCustomization', 'MasterData', 'flaticon-interface-8', '', [], [
                 
-                new AppMenuItem('MasterCatalog', 'MasterData.MasterCategory', 'flaticon-map', '/app/main/master/mst-category'),
-                new AppMenuItem('MasterCatalog', 'MasterData.MasterCategory', 'flaticon-map', '/app/main/master/mst-category'),
-                new AppMenuItem('MasterCatalog', 'MasterData.MasterCategory', 'flaticon-map', '/app/main/master/mst-category'),
+                new AppMenuItem('MasterCategry', 'MasterData.MasterCategory', 'flaticon-map', '/app/main/master/mst-category'),
+                new AppMenuItem('MasterCategry1', 'MasterData.MasterCategory', 'flaticon-map', '/app/main/master/mst-category'),
+                new AppMenuItem('MasterCategry2', 'MasterData.MasterCategory', 'flaticon-map', '/app/main/master/mst-category'),
 
             ]),
             new AppMenuItem('Editions', 'Pages.Editions', 'flaticon-app', '/app/admin/editions'),

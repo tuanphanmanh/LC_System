@@ -1,0 +1,84 @@
+﻿@using MyCompanyName.AbpZeroTemplate.Web.TagHelpers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Startup
+@{
+    ViewBag.CurrentPageName = AppAreaNamePageNames.Common.Notifications_Inbox;
+}
+
+@section Styles {
+    <link rel="stylesheet" abp-href="/view-resources/Areas/AppAreaName/Views/Notifications/Index.css" asp-append-version="true"/>
+}
+
+@section Scripts {
+    <script abp-src="/view-resources/Areas/AppAreaName/Views/Notifications/Index.js" asp-append-version="true"></script>
+}
+
+<abp-page-subheader title="@L("Notifications")">
+    <button class="btn btn-success" id="btnOpenNotificationSettingsModal">
+        <i class="la la-cog btn-md-icon"></i>
+        <span class="d-none d-md-inline-block">
+            @L("NotificationSettings")
+        </span>
+    </button>
+    <button class="btn btn-primary" id="btnSetAllNotificationsAsRead">
+        <i class="la la-check btn-md-icon"></i>
+        <span class="d-none d-md-inline-block">
+            @L("SetAllAsRead")
+        </span>
+    </button>
+</abp-page-subheader>
+
+<div class="@(await GetContainerClass())">
+    <div class="card">
+        <div class="card-body">
+            <div class="form">
+                <div class="row align-items-center mb-4">
+                    <div class="row align-items-center col-md-12">
+                        <div class="col-md-6">
+                            <div class="mb-5">
+                                <input id="ReceivedNotifications_StartEndRange" type="text" placeholder="@L("DateRange")" class="form-control date-range-picker"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-5">
+                                <select id="TargetValueFilterSelectionCombobox" class="form-select">
+                                    <option value="">@L("All")</option>
+                                    <option value="UNREAD">@L("Unread")</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-end">
+                        <button id="DeleteAllNotificationsButton" class="btn btn-danger">
+                            <i class="la la-times btn-md-icon"></i>
+                            <span class="d-none d-md-inline-block">
+                                @L("DeleteListedNotifications")
+                            </span>
+                        </button>
+                        <button id="RefreshNotificationTableButton" class="btn btn-primary">
+                            <i class="la la-refresh btn-md-icon"></i>
+                            <span class="d-none d-md-inline-block">
+                                @L("Refresh")
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <table id="NotificationsTable" class="table align-middle table-row-dashed fs-6 gy-5 dataTable dtr-inline no-footer">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th style="width: 50px;text-align:start;vertical-align: middle">@L("Actions")</th>
+                            <th style="width: 50px;text-align:center">@L("Severity")</th>
+                            <th>@L("Notification")</th>
+                            <th style="width: 100px;text-align:start">@L("CreationTime")</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

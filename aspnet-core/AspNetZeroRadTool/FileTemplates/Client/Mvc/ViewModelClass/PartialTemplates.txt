@@ -1,0 +1,20 @@
+{
+    "conditionalTemplates":[
+        {
+            "placeholder": "{{Master_Detail_Child_Base_Property_Here}}",
+            "condition": "{{Is_Master_Detail_Page_Child_Here}} == true",
+            "content": "
+        public {{Master_Detail_Child_Base_Entity_Type_Here}} {{Master_Detail_Child_Foreign_Property_Name_Here}} { get; set; } "
+        },
+        {
+            "placeholder": "{{Overridable_Entity_Base_Here}}",
+            "condition": "{{Generate_Overridable_Entity_Here}} == true",
+            "content": "Base"
+        },
+        {
+            "placeholder": "{{Overridable_Entity_Abstract_Here}}",
+            "condition": "{{Generate_Overridable_Entity_Here}} == true",
+            "content": " abstract"
+        }
+    ]
+}

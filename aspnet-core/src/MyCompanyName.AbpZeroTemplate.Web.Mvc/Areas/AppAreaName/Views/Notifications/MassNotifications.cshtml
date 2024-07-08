@@ -1,0 +1,64 @@
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Startup
+@using MyCompanyName.AbpZeroTemplate.Web.TagHelpers
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@{
+    ViewBag.CurrentPageName = AppAreaNamePageNames.Common.Notifications_MassNotifications;
+}
+
+@section Scripts {
+    <script abp-src="/view-resources/Areas/AppAreaName/Views/_Bundles/mass-notification-list.js" asp-append-version="true"></script>
+}
+
+<abp-page-subheader title="@L("MassNotifications")">
+    <button class="btn btn-secondary" id="CreateNewMassNotificationButton">
+        <i class="la la-plus btn-md-icon"></i>
+        <span class="d-none d-md-inline-block">
+            @L("CreateNewMassNotification")
+        </span>
+    </button>
+    <button class="btn btn-primary" id="RefreshPublishedMassNotificationsButton">
+        <i class="la la-refresh btn-md-icon"></i>
+        <span class="d-none d-md-inline-block">
+            @L("Refresh")
+        </span>
+    </button>
+</abp-page-subheader>
+
+<div class="@(await GetContainerClass())" id="PublishedMassNotificationsContainer">
+    <div class="card mt-5">
+        <div class="card-body">
+            <div class="row align-items-center mb-4">
+                <div class="row align-items-center col-md-12">
+                    <div class="col">
+                        <div class="mb-5">
+                            <input id="PublishedNotifications_StartEndRange" type="text" placeholder="@L("DateRange")" class="form-control date-range-picker"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <table id="PublishedMassNotificationsTable" class="table align-middle table-row-dashed fs-6 gy-5 dataTable dtr-inline no-footer">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>@L("Message")</th>
+                        <th>@L("Severity")</th>
+                        <th>@L("LastModificationTime")</th>
+                        <th>@L("IsPublished")</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DataDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(@L("Message")))
+            <div class="modal-body" style="overflow-wrap: break-word;">
+            </div>
+        </div>
+    </div>
+</div>

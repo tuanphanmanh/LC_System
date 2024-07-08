@@ -48,11 +48,15 @@
 
     <ItemGroup>
         <PackageReference Include="Abp.Castle.Log4Net" Version="9.1.1" />
+        <PackageReference Include="EPPlus" Version="7.2.1" />
+        <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+        <PackageReference Include="EPPlus.Interfaces" Version="6.1.1" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="NPOI.Template" Version="1.2.0" />
     </ItemGroup>
 
     <ItemGroup>

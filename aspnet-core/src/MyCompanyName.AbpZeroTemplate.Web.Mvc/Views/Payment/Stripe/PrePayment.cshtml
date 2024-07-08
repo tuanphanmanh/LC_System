@@ -1,0 +1,68 @@
+﻿@using MyCompanyName.AbpZeroTemplate
+@using MyCompanyName.AbpZeroTemplate.Web.Resources
+@model MyCompanyName.AbpZeroTemplate.Web.Models.Stripe.StripePurchaseViewModel
+@inject IWebResourceManager WebResourceManager
+@{
+    Layout = "~/Views/Account/_Layout.cshtml";
+    ViewBag.DisableTenantChange = true;
+}
+
+@section Scripts
+{
+    <script src="https://js.stripe.com/v3"></script>
+    <script abp-src="/view-resources/Views/Stripe/_StripeRedirectToSession.js" asp-append-version="true"></script>
+}
+
+<div class="login-form">
+    <div class="pb-13 pt-lg-0 pt-5">
+        <h3 class="fw-bolder text-dark fs-4 fs-1-lg">
+            @L("Purchase")
+        </h3>
+    </div>
+    <div class="form-actions">
+        @foreach (var product in Model.Payment.SubscriptionPaymentProducts)
+        {
+            <div class="d-flex justify-content-between">
+                <span>
+                    @product.Count x @product.Description
+                </span>
+                <span>
+                    @AbpZeroTemplateConsts.CurrencySign@product.GetTotalAmount().ToString("N2")
+                </span>
+            </div>
+        }
+        <hr class="border-green"/>
+        <div class="mb-5 row">
+            <label class="col-sm-4 form-label">@L("Price")</label>
+            <div class="col-sm-8 text-end">
+                <p class="form-control-static text-bold" id="totalPrice">
+                    @AbpZeroTemplateConsts.CurrencySign@(Model.Amount.ToString("N2"))
+                </p>
+            </div>
+        </div>
+        @if (Model.IsRecurring)
+        {
+            if (Model.IsProrationPayment)
+            {
+                <div class="mb-5 row">
+                    <label class="col-sm-12 form-label">@L("RecurringSubscriptionUpgradeNote")</label>
+                </div>
+            }
+            else
+            {
+                <div class="mb-5 row">
+                    <div class="col-sm-12 text-end">
+                        <p class="form-control-static text-bold" id="totalPrice">
+                            @L("AutomaticBilling")
+                        </p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <input type="hidden" id="sessionId" value="@Model.SessionId"/>
+    <input type="hidden" id="stripePublishableKey" value="@Model.Configuration.PublishableKey"/>
+
+    <button id="stripe-checkout" class="btn btn-primary btn-block">@L("Purchase")</button>
+</div>

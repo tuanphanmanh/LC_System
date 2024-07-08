@@ -1,0 +1,64 @@
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using Abp.MultiTenancy
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("AddFriendFromDifferentTenant")))
+
+@{
+    var tenantToTenantAllowed = AbpSession.TenantId == null || IsFeatureEnabled("App.ChatFeature.TenantToTenant");
+}
+
+<div class="modal-body">
+    <form>
+
+        @if (AbpSession.TenantId != null && IsFeatureEnabled("App.ChatFeature.TenantToHost"))
+        {
+            <div class="row mb-5">
+                <label class="col-4 form-label">@L("IsHostUser")</label>
+                <div class="col">
+                    <span class="form-check form-switch form-check-custom">
+                        <label>
+                            <input id="SwitchToTenant"
+                                   name="SwitchToTenant"
+                                   class="form-check-input"
+                                   type="checkbox"
+                                   @(IsFeatureEnabled("App.ChatFeature.TenantToTenant") ? "" : "checked='checked' disabled")>
+                            <span class="form-check-label"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        }
+        
+        <div class="row mb-5 tenancy-name-group" 
+             style="@(tenantToTenantAllowed ? "display: flex" : "display: none")">
+            <label class="col-4 form-label">
+                <label>@L("TenancyName")</label>
+            </label>
+            <label class="col form-label">
+                <input class="form-control"
+                       type="text"
+                       id="TenancyName"
+                       name="TenancyName"
+                       required
+                       maxlength="@AbpTenantBase.MaxTenancyNameLength">
+            </label>
+        </div>
+        
+
+        <div class="row mb-5">
+            <label class="col-4 form-label">
+                <label>@L("UserName")</label>
+            </label>
+            <label class="col form-label">
+                <input class="form-control"
+                       type="text"
+                       id="UserName"
+                       name="UserName"
+                       required>
+            </label>
+        </div>
+    </form>
+</div>
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

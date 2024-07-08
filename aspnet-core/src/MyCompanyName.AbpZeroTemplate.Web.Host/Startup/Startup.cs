@@ -303,7 +303,6 @@ namespace MyCompanyName.AbpZeroTemplate.Web.Startup
                     });
             });
         }
-
         private void ConfigureSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen(options =>

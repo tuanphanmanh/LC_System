@@ -7,7 +7,7 @@
     },
     "include": [
         "**/*"
-    ],
+    ],  
     "exclude": [
         "bin",
         "node_modules",

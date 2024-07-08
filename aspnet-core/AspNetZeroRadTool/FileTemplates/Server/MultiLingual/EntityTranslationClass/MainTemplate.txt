@@ -1,0 +1,16 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Abp.Domain.Entities.Auditing;
+using Abp.Domain.Entities;{{Using_Auditing_Here}}
+
+namespace {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}
+{
+	[Table("{{Entity_Name_Here}}Translation")]{{Auditing_Attr_Here}}
+    public{{Overridable_Entity_Abstract_Here}} class {{Entity_Name_Here}}Translation{{Overridable_Entity_Base_Here}} : {{Base_Class_Here}}{{Primary_Key_Inside_Tag_Here}} {{Entity_Translation_Interface_Here}}
+    {{{Tenant_Id_Here}}
+{{Property_Looped_Template_Here}}
+
+{{Entity_Translation_Implementation_Here}}
+    }
+}

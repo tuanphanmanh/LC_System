@@ -1,0 +1,73 @@
+﻿@using System.Globalization
+@using Abp.Extensions
+@using MyCompanyName.AbpZeroTemplate
+@using MyCompanyName.AbpZeroTemplate.Localization
+@using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments.Paypal
+@using MyCompanyName.AbpZeroTemplate.Web.Resources
+@model MyCompanyName.AbpZeroTemplate.Web.Models.Paypal.PayPalPurchaseViewModel
+@{
+    Layout = "~/Views/Account/_Layout.cshtml";
+    ViewBag.DisableTenantChange = true;
+}
+
+@section Scripts
+{
+    <script src="https://www.paypal.com/sdk/js?client-id=@Model.Configuration.ClientId&currency=@AbpZeroTemplateConsts.Currency@Model.GetDisabledFundingsQueryString()" asp-append-version="true"></script>
+    <script abp-src="/view-resources/Views/PayPal/_PrePayment.js" asp-append-version="true"></script>
+}
+
+<div class="login-form">
+    <div class="pb-13 pt-lg-0 pt-5">
+        <h3 class="fw-bolder text-dark fs-4 fs-1-lg">@L("Purchase")</h3>
+    </div>
+    <div class="form-actions">
+        @foreach (var product in Model.Payment.SubscriptionPaymentProducts)
+        {
+            <div class="d-flex justify-content-between">
+                <span>
+                    @product.Count x @product.Description
+                </span>
+                <span>
+                    @AbpZeroTemplateConsts.CurrencySign@product.GetTotalAmount().ToString("N2")
+                </span>
+            </div>
+        }
+        <hr class="border-green"/>
+        <div class="mb-5 row">
+            <label class="col-sm-4 form-label">@L("Total")</label>
+            <div class="col-sm-8 text-end">
+                <p class="form-control-static text-bold" id="totalPrice">
+                    @AbpZeroTemplateConsts.CurrencySign@(Model.Amount.ToString("N2"))
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <form id="payPalCheckoutForm" method="post" asp-action="PostPayment" asp-controller="PayPal" class="register-form">
+        <input type="hidden" name="PaymentId" value="@Model.Payment.Id"/>
+        <input type="hidden" name="PayPalOrderId" value=""/>
+        <input type="hidden" name="Amount" value="@Model.Amount.ToString("F", CultureInfo.InvariantCulture)"/>
+        <input type="hidden" name="clientId" value="@Model.Configuration.ClientId"/>
+        <input type="hidden" name="currency" value="@AbpZeroTemplateConsts.Currency"/>
+
+        @if (!Model.Configuration.DemoUsername.IsNullOrEmpty() && !Model.Configuration.DemoPassword.IsNullOrEmpty())
+        {
+            <div class="alert bg-light-primary d-flex align-items-center p-5 mb-10">
+                <span class="svg-icon svg-icon-2hx svg-icon-primary me-4">
+                    <i class="fas fa-info-circle fs-1" aria-label="@L("Payment")"></i>
+                </span>
+                <div class="d-flex flex-column">
+                    <h4 class="mb-1 text-primary"> @L("DemoPayPalAccount")</h4>
+                    <span>
+                        <p>
+                            <span>@L("UserName"): <strong>@Model.Configuration.DemoUsername</strong></span><br/>
+                            <span>@L("Password"): <strong>@Model.Configuration.DemoPassword</strong></span>
+                        </p>
+                    </span>
+                </div>
+            </div>
+        }
+
+        <div id="paypal-button"></div>
+    </form>
+</div>

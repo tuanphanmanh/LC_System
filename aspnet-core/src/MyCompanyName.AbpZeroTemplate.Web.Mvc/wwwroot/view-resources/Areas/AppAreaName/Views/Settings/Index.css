@@ -1,0 +1,26 @@
+﻿.upload-logo-dark{
+    background-color: #1e1e2d;
+    color: #fff;
+    border-color: #1e1e2d;
+}
+
+.upload-logo-dark h6{
+    color: #fff;
+}
+
+.upload-logo-light{
+    background-color: #fff;
+    color: #2c3e50;
+    border-color: #fff;
+}
+
+.upload-logo-light h6{
+    color: #2c3e50;
+}
+
+@media (max-width: 767px) {
+    #SettingsAppearanceTab .upload-logo{
+        margin-bottom:15px;
+    }
+}
+

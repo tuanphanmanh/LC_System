@@ -1,0 +1,71 @@
+﻿@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate.Authorization
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("AddFriend")))
+
+@{
+    var interTenantChatAllowed = AbpSession.TenantId == null || IsFeatureEnabled("App.ChatFeature.TenantToTenant") || IsFeatureEnabled("App.ChatFeature.TenantToHost");
+}
+
+<div class="modal-body" id="MyModal">
+
+    @if (interTenantChatAllowed)
+    {
+        <div class="row text-end mb-3">
+            <div class="col">
+                <button class="btn btn-primary" id="AddFriendFromDifferentTenant">@L("AddFriendFromDifferentTenant")</button>
+            </div>
+        </div>
+    }
+
+    @if (IsGranted(AppPermissions.Pages_Administration_Users))
+    {
+        <form>
+            <h3>@L("MembersInThisTenantTitle")</h3>
+
+            <div class="input-group margin-bottom-10">
+                <input class="form-control lookup-filter-text" placeholder="@L("SearchWithThreeDot")" type="text">
+                <button class="btn btn-primary lookup-filter-button" type="submit">
+                    <i class="flaticon-search-1" aria-label="@L("Search")"></i>
+                </button>
+            </div>
+        </form>
+        <table class="lookup-modal-table table align-middle table-row-dashed fs-6 gy-5 dataTable dtr-inline no-footer">
+            <thead>
+            <tr>
+                <th>@L("Select")</th>
+                <th>@L("Name")</th>
+                <th>@L("Surname")</th>
+                <th>@L("Email")</th>
+            </tr>
+            </thead>
+        </table>
+    }
+    else
+    {
+        <form class="mt-5">
+            <div class="row mb-5">
+                <label class="col-4 form-label">
+                    <label>@L("UserName")</label>
+                </label>
+                <label class="col form-label">
+                    <input class="form-control"
+                           type="text"
+                           id="UserName"
+                           name="UserName"
+                           required>
+                </label>
+            </div>
+        </form>
+    }
+
+</div>
+
+    @if (IsGranted(AppPermissions.Pages_Administration_Users))
+    {
+        @await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+    }
+    else
+    {
+        @await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+    }

@@ -1,0 +1,12 @@
+﻿{{Enum_Using_Looped_Template_Here}}
+using System;
+using Abp.Application.Services.Dto;
+
+namespace {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}.Dtos
+{
+    public class {{Entity_Name_Here}}Dto : {{Entity_Name_Here}}DtoBase
+    {
+        // Write your custom code here. 
+        // ASP.NET Zero Power Tools will not overwrite this class when you regenerate the related entity.
+    }
+}

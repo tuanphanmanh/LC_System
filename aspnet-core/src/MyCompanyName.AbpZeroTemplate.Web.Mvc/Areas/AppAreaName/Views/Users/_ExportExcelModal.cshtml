@@ -1,0 +1,30 @@
+﻿@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Users
+@model UserExportExcelViewModel
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ChooseColumnsForExcelExport")))
+
+<div class="modal-body">
+  <form>
+    <div class="d-flex justify-content-between">
+      <h2>@L("Columns")</h2>
+      <button id="btnToggleAll" class="btn btn-primary btn-sm mb-5">@L("SelectAll")</button>
+    </div>
+    @for (var i = 0; i < Model.UserExcelColumns.Count; i++)
+    {
+      var userColumn = "userColumn" + i;
+
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" value="@Model.UserExcelColumns[i]" id="@userColumn">
+        <label class="form-check-label" for="@userColumn">
+          @Model.UserExcelColumns[i]
+        </label>
+      </div>
+    }
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-light-primary fw-bold close-button" data-bs-dismiss="modal">@L("Cancel")</button>
+  <button type="button" class="btn btn-primary save-button"><i class="fa fa-save"></i> <span>@L("ExportExcel")</span></button>
+</div>
