@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace MyCompanyName.AbpZeroTemplate.Master
 {
@@ -22,9 +23,11 @@ namespace MyCompanyName.AbpZeroTemplate.Master
     public class MstLCCertificateAppService : AbpZeroTemplateAppServiceBase, IMstLCCertificateAppService
     {
         private readonly IRepository<MstLCCertificate, long> _certificateRepo;
-        public MstLCCertificateAppService(IRepository<MstLCCertificate, long> CertificateRepo)
+        private readonly IRepository<MstLCCategory, long> _categoryRepo;
+        public MstLCCertificateAppService(IRepository<MstLCCertificate, long> CertificateRepo, IRepository<MstLCCategory, long> categoryRepo)
         {
             _certificateRepo = CertificateRepo;
+            _categoryRepo = categoryRepo;
         }
         [HttpGet]
         [AbpAuthorize(AppPermissions.MasterCertificate_Search)]
@@ -50,11 +53,14 @@ namespace MyCompanyName.AbpZeroTemplate.Master
         [AbpAuthorize(AppPermissions.MasterCertificate_CreateOrEdit)]
         public async Task CreateOrEdit(SearchCertificateOutputDto dto)
         {
-            var CategoryCheck = _certificateRepo.GetAll().Where(p => p.Name.Equals(dto.Name)).FirstOrDefault();
-
+            var certificateCheck = _certificateRepo.GetAll().Where(p => p.Name.Equals(dto.Name)).FirstOrDefault();
+            if(_categoryRepo.GetAll().Where(a => a.Id == dto.CategoryId).FirstOrDefault() == null)
+            {
+                throw new UserFriendlyException("Invalid Category ID");
+            }
             if (dto.Id == 0 || dto.Id.ToString() == "null")  // create New
             {
-                if (CategoryCheck == null)
+                if (certificateCheck == null)
                 {
                     var newCategory = new MstLCCertificate();
                     newCategory.Name = dto.Name;

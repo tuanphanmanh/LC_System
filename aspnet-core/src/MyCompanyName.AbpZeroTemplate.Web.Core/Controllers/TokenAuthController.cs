@@ -146,7 +146,6 @@ namespace MyCompanyName.AbpZeroTemplate.Web.Controllers
             return SimpleStringCipher.Instance.Encrypt(query);
         }
 
-
         [HttpPost]
         public async Task<AuthenticateResultModel> Authenticate([FromBody] AuthenticateModel model)
         {
