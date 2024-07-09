@@ -54,12 +54,14 @@ namespace MyCompanyName.AbpZeroTemplate.Master
         public async Task CreateOrEdit(SearchCertificateOutputDto dto)
         {
             var certificateCheck = _certificateRepo.GetAll().Where(p => p.Name.Equals(dto.Name)).FirstOrDefault();
-            if(_categoryRepo.GetAll().Where(a => a.Id == dto.CategoryId).FirstOrDefault() == null)
+
+            // create new certificate
+            if (dto.Id == 0 || dto.Id.ToString() == "null")  
             {
-                throw new UserFriendlyException("Invalid Category ID");
-            }
-            if (dto.Id == 0 || dto.Id.ToString() == "null")  // create New
-            {
+                if (_categoryRepo.GetAll().Where(a => a.Id == dto.CategoryId).FirstOrDefault() == null)
+                {
+                    throw new UserFriendlyException("Invalid Category ID");
+                }
                 if (certificateCheck == null)
                 {
                     var newCategory = new MstLCCertificate();
@@ -74,6 +76,7 @@ namespace MyCompanyName.AbpZeroTemplate.Master
             }
             else // update 
             {
+
                 var updateCategory = await _certificateRepo.FirstOrDefaultAsync(e => e.Id == dto.Id);
                 if (updateCategory != null)
                 {
