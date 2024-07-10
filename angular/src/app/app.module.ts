@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { ChatSignalrService } from '@app/shared/layout/chat/chat-signalr.service';
@@ -207,7 +207,9 @@ import { PdfViewerModule } from '@syncfusion/ej2-angular-pdfviewer';
         ChangeProfilePictureModalModule,
         GridModule,
         PdfViewerModule 
-    ]
+    ],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
 

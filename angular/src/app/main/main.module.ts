@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppCommonModule } from '@app/shared/common/app-common.module';
 import { UtilsModule } from '@shared/utils/utils.module';
@@ -15,6 +15,7 @@ import { BsDatepickerConfig, BsDaterangepickerConfig, BsLocaleService } from 'ng
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxBootstrapDatePickerConfigService } from 'assets/ngx-bootstrap/ngx-bootstrap-datepicker-config.service';
 import { SubheaderModule } from '@app/shared/common/sub-header/subheader.module';
+import { AppComponent } from '@app/app.component';
 
 NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
 
@@ -33,6 +34,7 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         BsDropdownModule.forRoot(),
         PopoverModule.forRoot(),
         SubheaderModule,    
+        
     ],
     declarations: [],
     providers: [
@@ -40,5 +42,10 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         { provide: BsDaterangepickerConfig, useFactory: NgxBootstrapDatePickerConfigService.getDaterangepickerConfig },
         { provide: BsLocaleService, useFactory: NgxBootstrapDatePickerConfigService.getDatepickerLocale },
     ],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MainModule {}
+
+
+ 

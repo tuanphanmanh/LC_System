@@ -27,6 +27,14 @@ import { RouterModule } from '@angular/router';
                         loadChildren: () => import('./phonebook/phonebook.module').then((m) => m.PhonebookModule),
                     },
 
+                    
+                    {
+                        path: 'master/mst-certificate',
+                        loadChildren: () => import('./master/mst-certificate/mst-certificate.module').then((m) => m.MstCertificateModule),
+                        data: { permission: 'MasterData.MasterCertificate' },
+                    },
+ 
+
                 ],
             },
         ]),

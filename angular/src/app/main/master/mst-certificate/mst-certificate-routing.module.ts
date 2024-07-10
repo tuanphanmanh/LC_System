@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MstCategoryComponent } from './mst-category.component';
+import { MstCertificateComponent } from './mst-certificate.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: MstCategoryComponent,
+        component: MstCertificateComponent,
         pathMatch: 'full',
     },
 ];
@@ -14,4 +14,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class  MstCategoryRoutingModule {}
+export class  MstCertificateRoutingModule {}

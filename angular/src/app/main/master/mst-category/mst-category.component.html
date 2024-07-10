@@ -1,78 +1,136 @@
 <div [@routerTransition]>
-    <div class="master-container">
-        <div class=" w-100 h-100">
-            <div class="control-section w-100 h-100">
-                <div class="master-title d-flex align-items-center">
-                    <p class="h5 title">{{'Master Category' | localize }}</p>
-                </div>
-                <div class="form-filter col-12 d-flex">
-                    <div class="input-filter col-12 mr-1">
-                        <div class="row align-items-center mb-4">
-                            <div class="col-xl-12">
-                                <div class="mb-5 m-form__group align-items-center">
-                                    <div class="input-group">
-                                        <label class="form-control m-label"> Name</label>
-                                        <input name="filterText" autoFocus class="form-control m-input"
-                                            placeholder="Search..." type="text" />
-                                        <button class="btn btn-primary" type="submit" (click)="searchDatas()"> 
-                                            {{ 'Search' | localize }} <i class="fas fa-search" aria-hidden="true"></i>
-                                        </button>
-                                        <button class="btn btn-danger" type="submit" (click)="clearTextSearch()"> 
-                                            {{ 'Refresh' | localize }} <i class="fas fa-refresh" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+    <h3>Category</h3>
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <div class="row m-2 mt-5">
+                    <div class="col-sm-12 text-end">
+                        <div class="input-group">
+                            <label class="form-control m-label"> Name</label>
+                            <input name="filterText" autoFocus class="form-control m-input" placeholder="Search..."
+                                type="text" />
+                            <button class="btn btn-primary" type="submit" (click)="searchDatas()">
+                                Search <i class="fas fa-search" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-danger" type="submit" (click)="clearTextSearch()">
+                                Refresh <i class="fas fa-refresh" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="row pt-1">
-                    <div class="col-12 d-flex justify-content-start align-items-center">
-                        <div class="primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
-                            <div class="primeng-paging-container">
-                                <div class="col-12">
- 
-                                </div>
-        
-                            </div>
+                <div class="row align-items-center">
+                    <div class="primeng-datatable-container" [busyIf]= "primengTableHelperCategory.isLoading" >
+                       
+                        <p-table #dataTableEntityChanges sortMode="multiple" (onLazyLoad)="getEntityChanges($event)" style="min-width: 100%"
+                            [value]="primengTableHelperEntityChanges.records"
+                            rows="{{ primengTableHelperEntityChanges.defaultRecordsCountPerPage }}" [paginator]="false"
+                            [lazy]="true" scrollable="true" ScrollWidth="100%" [tableStyle]="{'min-width': '50rem'}"
+                            resizableColumns="primengTableHelperEntityChanges.resizableColumns">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 75px"></th>
+                                    <th style="width: 75px"></th>
+                                    <th style="width: 150px" pSortableColumn="userName">
+                                        {{ 'UserName' | localize }}
+                                        <p-sortIcon field="userName"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 250px">
+                                        {{ 'Service' | localize }}
+                                    </th>
+                                    <th style="width: 250px">
+                                        {{ 'Action' | localize }}
+                                    </th>
+                                    <th style="width: 100px" pSortableColumn="executionDuration">
+                                        {{ 'Duration' | localize }}
+                                        <p-sortIcon field="executionDuration"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px">
+                                        {{ 'IpAddress' | localize }}
+                                    </th>
+                                    <th style="width: 150px">
+                                        {{ 'Client' | localize }}
+                                    </th>
+                                    <th style="width: 150px">
+                                        {{ 'Browser' | localize }}
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="executionTime">
+                                        {{ 'Time' | localize }}
+                                        <p-sortIcon field="executionTime"></p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
 
+                            <table>
+                                <thead>
+                                    <tr class="tbData">
+                                        <th style="width: 150px"> Id </th>
+                                        <th style="width: 250px"> Name </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 150px">
+                                            <span class="p-column-title">{{ 'Id' | localize }}</span>
+                                            <span title="{{ record.changeTypeName }}">
+                                                {{ l(record.changeTypeName) }}
+                                            </span>
+                                        </td>
+                                        <td style="width: 250px">
+                                            <span class="p-column-title">{{ 'Name' | localize }}</span>
+                                            {{ record.entityTypeFullName }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </p-table>
+                        <div class="primeng-no-data"  >
+                            {{ 'NoData' | localize }}
+                        </div>
+                        <div class="primeng-paging-container">
+                            <p-paginator 
+                                [rows]="primengTableHelperEntityChanges.defaultRecordsCountPerPage"
+                                #paginatorEntityChanges (onPageChange)="getEntityChanges($event)"
+                                [totalRecords]="primengTableHelperEntityChanges.totalRecordsCount" 
+                                [rowsPerPageOptions]="primengTableHelperEntityChanges.predefinedRecordsCountPerPage" 
+                                [showCurrentPageReport]="true" [currentPageReportTemplate]="'TotalRecordsCount'
+                                | localize: primengTableHelperEntityChanges.totalRecordsCount">
+                            </p-paginator>
                         </div>
                     </div>
                 </div>
+
                 <!-- chức năng  -->
                 <div class="row">
                     <div class="col-12 d-flex justify-content-end align-items-center mt-10">
                         <div class="button-action mr-2">
                             <button class="btn btn-success">
                                 <i class="fa fa-plus btn-md-icon"></i>
-                                <span class="d-none d-md-inline-block">{{ 'Add' | localize }} </span> 
+                                <span class="d-none d-md-inline-block"> Add </span>
                             </button>
                         </div>
                         <div class="button-action mr-2">
-                            <button class="btn btn-info"  >
+                            <button class="btn btn-info">
                                 <i class="fas fa-edit"></i>
-                                <span class="d-none d-md-inline-block" >{{ 'Edit' | localize }} </span> 
+                                <span class="d-none d-md-inline-block"> Edit</span>
                             </button>
                         </div>
                         <div class="button-action mr-2">
-                            <button class="btn btn-danger"   >
+                            <button class="btn btn-danger">
                                 <i class="fas fa-trash-alt"></i>
-                                <span class="d-none d-md-inline-block">{{ 'Delete' | localize }} </span> 
+                                <span class="d-none d-md-inline-block">Delete </span>
                             </button>
                         </div>
                         <div class="button-action mr-2">
-                            <button class="btn btn-dark">
-                                <i class="fa fa-plus btn-md-icon"></i>
-                                <span class="d-none d-md-inline-block">{{ 'Excel' | localize }} </span> 
+                            <button class="btn btn-outline btn-dark">
+                                <i class="fa fa-file-excel btn-md-icon"></i>
+                                <span class="d-none d-md-inline-block"> Excel</span>
                             </button>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- <create-or-edit-category-modal #createOrEditCategory (modalSave)="searchDatas()"></create-or-edit-category-modal> -->
