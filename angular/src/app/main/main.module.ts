@@ -32,7 +32,7 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         BsDatepickerModule.forRoot(),
         BsDropdownModule.forRoot(),
         PopoverModule.forRoot(),
-        SubheaderModule,
+        SubheaderModule,    
     ],
     declarations: [],
     providers: [

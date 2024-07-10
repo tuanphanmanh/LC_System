@@ -22,21 +22,13 @@ export class AppNavigationService {
             ),
             new AppMenuItem('Dashboard', 'Pages.Tenant.Dashboard', 'flaticon-line-graph', '/app/main/dashboard'),
             new AppMenuItem('Tenants', 'Pages.Tenants', 'flaticon-list-3', '/app/admin/tenants'),
-            new AppMenuItem('UserCustomization', 'MasterData', 'flaticon-interface-8', '', [], [
-                
-                new AppMenuItem('MasterCategry', 'MasterData.MasterCategory', 'flaticon-map', '/app/main/master/mst-category'),
-                new AppMenuItem('MasterCategry1', 'MasterData.MasterCategory', 'flaticon-map', '/app/main/master/mst-category'),
-                new AppMenuItem('MasterCategry2', 'MasterData.MasterCategory', 'flaticon-map', '/app/main/master/mst-category'),
-
+            new AppMenuItem('Master', 'MasterData', 'flaticon-interface-8', ' ', [], [
+                new AppMenuItem('Category', 'MasterData.MasterCategory', 'fa-solid fa-grip', '/app/main/master/mst-category'),
             ]),
+
+            new AppMenuItem('PhoneBook', null , 'flaticon-list-3', '/app/main/phonebook'),
             new AppMenuItem('Editions', 'Pages.Editions', 'flaticon-app', '/app/admin/editions'),
-            new AppMenuItem(
-                'Administration',
-                '',
-                'flaticon-interface-8',
-                '',
-                [],
-                [
+            new AppMenuItem('Administration','','flaticon-interface-8','',[], [
                     new AppMenuItem(
                         'OrganizationUnits',
                         'Pages.Administration.OrganizationUnits',

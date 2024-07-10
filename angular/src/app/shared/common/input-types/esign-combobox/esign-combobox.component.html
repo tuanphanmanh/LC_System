@@ -1,0 +1,13 @@
+<div class="input-group" [ngClass]="className ? className : ''">
+  <span class="input-group-text left-text" *ngIf="text">{{ text }}<p *ngIf="isValidate" style="color: var(--toyota-color-red); margin: 0.2rem 0 0.2rem 0.5rem;">*</p></span>
+  <select
+    #input
+    [class.required]="isRequired"
+    class="form-control esign-form-control"
+    [(ngModel)]="value"
+    [disabled]="isDisabled ? true : null"
+    (change)="changeValue($event)"
+  >
+    <option *ngFor="let item of items" [value]="item ? item[key] : undefined" [selected]="selectedItem !== null && item && item[key] === selectedItem ? true : false">{{ item ? item[label] : undefined }}</option>
+  </select>
+</div>

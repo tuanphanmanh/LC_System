@@ -1,0 +1,35 @@
+<!-- esign DatePicker -->
+<div class="input-group remove-border-right-radius" [ngClass]="className ? className : ''" style="position: relative;">
+  <span *ngIf="text" class="input-group-text left-text">{{ text }}<p *ngIf="isValidate" style="color: var(--toyota-color-red); margin: 0.2rem 0 0.2rem 0.5rem;">*</p></span>
+  <input
+    type="text"
+    #input
+    #datepicker="bsDatepicker"
+    name="datePicker"
+    class="form-control esign-form-control"
+    [class.required]="isRequired"
+    [minDate]="minDate"
+    [maxDate]="maxDate"
+    [disabled]="isDisabled ? true : null"
+    bsDatepicker
+    datePickerMomentModifier
+    [bsConfig]="hasTimePicker ? { dateInputFormat: 'DD/MM/YYYY HH:mm' } : { dateInputFormat: dateInputFormat }"
+    autocomplete="off"
+    [outsideClick]="!hasTimePicker"
+    [outsideEsc]="!hasTimePicker"
+    [placement]="placementDatePicker"
+    [placeholder]="placeholder"
+    [minMode]="minMode"
+    (keydown)="keydown($event)"
+    (input)="inputChange($event)"
+    (bsValueChange)="bsValueChange($event)"
+    (onShown)="!isDisabled ? hideDatePicker($event) : undefined"
+    [datesEnabled]="datesEnabled"
+  />
+
+  <span class="input-group-icon right-text calendar" (click)="!isDisabled ? openDatePicker() : undefined"
+    [attr.aria-expanded]="datepicker.isOpen">
+    <i class="fa esign-fa fa-calendar-alt"></i>
+  </span>
+</div>
+<!-- End esign DatePicker -->

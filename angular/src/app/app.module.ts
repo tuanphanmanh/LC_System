@@ -96,6 +96,9 @@ import { ViewRecoveryCodesModalComponent } from './shared/layout/profile/view-re
 import { AddFriendModalComponent } from './shared/layout/chat/add-friend-modal.component';
 import { AddFromDifferentTenantModalComponent } from './shared/layout/chat/add-from-different-tenant-modal.component';
 import { FriendsLookupTableComponent } from './shared/layout/chat/friends-lookup-table.component';
+import { MstLCCategoryServiceProxy } from '@shared/service-proxies/service-proxies';
+import { GridModule } from '@syncfusion/ej2-angular-grids';
+import { PdfViewerModule } from '@syncfusion/ej2-angular-pdfviewer';
 
 @NgModule({
     declarations: [
@@ -201,7 +204,9 @@ import { FriendsLookupTableComponent } from './shared/layout/chat/friends-lookup
         NgxSpinnerModule,
         AppBsModalModule,
         SubheaderModule,
-        ChangeProfilePictureModalModule
+        ChangeProfilePictureModalModule,
+        GridModule,
+        PdfViewerModule 
     ]
 })
 export class AppModule { }

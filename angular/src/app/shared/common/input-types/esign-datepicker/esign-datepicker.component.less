@@ -1,0 +1,98 @@
+::ng-deep {
+    .display-none {
+        display: none;
+    }
+
+    .bs-datepicker {
+        box-shadow: 0 -2px 10px 0 #aaa !important;
+    }
+
+    .bs-datepicker-container {
+        padding: 0px;
+        opacity: 1 !important;
+    }
+
+    .bs-datepicker-head {
+        height: 30px;
+        padding: 2px 10px;
+    }
+
+    .bs-datepicker-body {
+        padding: 0;
+        min-height: auto;
+        min-width: auto;
+    }
+
+    .bs-datepicker-body table.days span {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+    }
+}
+
+i.fa.fa-calendar-alt {
+    color: #21bd8f !important;
+}
+
+input:not([disabled])[bsDatepicker]:-moz-read-only {
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+input:not([disabled])[bsDatepicker] {
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+input[disabled][bsDatepicker]:-moz-read-only {
+    background-color: #eeeeee;
+    cursor: not-allowed;
+}
+
+input[disabled][bsDatepicker] {
+    background-color: #eeeeee;
+    cursor: not-allowed;
+}
+
+input {
+    padding: 0.15rem 0.6rem;
+}
+
+
+
+.custom-content {
+    position: absolute;
+    z-index: 2000;
+    top: 240px;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    left: 45px;
+}
+
+.input-group{
+    width: 99% !important;
+    margin-left: 0.5%;
+    margin-bottom: 0.5%;
+}
+.input-group-text{
+    width: 160px;
+    padding: calc(0.5rem + 1px) calc(1.5rem + 1px);
+}
+.input-group-icon {
+    color: var(--kt-input-group-addon-color);
+    background-color: var(--kt-input-group-addon-bg);
+    border: 1px solid var(--kt-input-group-addon-border-color);
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 0.475rem;
+    justify-content: center;
+}
+.calendar{
+    width: 45px !important;
+}

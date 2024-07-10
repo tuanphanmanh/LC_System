@@ -12,8 +12,21 @@ import { RouterModule } from '@angular/router';
                         loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
                         data: { permission: 'Pages.Tenant.Dashboard' },
                     },
-                    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-                    { path: '**', redirectTo: 'dashboard' },
+                    // { path: '', redirectTo: 'dashboard', pathMatch: 'full' },   
+                    // { path: '**', redirectTo: 'dashboard' },
+                    
+                    //master
+                    {
+                        path: 'master/mst-category',
+                        loadChildren: () => import('./master/mst-category/mst-category.module').then((m) => m.MstCategoryModule),
+                        data: { permission: 'MasterData.MasterCategory' },
+                    },
+
+                    {
+                        path: 'phonebook',
+                        loadChildren: () => import('./phonebook/phonebook.module').then((m) => m.PhonebookModule),
+                    },
+
                 ],
             },
         ]),
@@ -21,3 +34,5 @@ import { RouterModule } from '@angular/router';
     exports: [RouterModule],
 })
 export class MainRoutingModule {}
+
+

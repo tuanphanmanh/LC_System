@@ -1,0 +1,15 @@
+
+<label *ngIf="show"  class="containerActive" [ngClass]="className? className :''">
+    <input
+        class=" form-control input-text"
+        type="checkbox"
+        #iCheckBox
+        name="name"
+        (change)="onChangeValue($event.currentTarget.checked)"
+        [checked]="selectedValue"
+        [value]="value"
+        [disabled]="isDisabled ? true : null"
+    />
+    <span class="backgroundActive"></span>
+    <span class="maskActive"></span>
+</label>

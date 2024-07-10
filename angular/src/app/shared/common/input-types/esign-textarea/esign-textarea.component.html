@@ -1,0 +1,17 @@
+<div class="input-group" [ngClass]="className ? className : ''">
+  <span class="input-group-text left-text" *ngIf="text">{{ text }}<p *ngIf="isValidate" style="color: var(--toyota-color-red); margin: 0.2rem 0 0.2rem 0.5rem;">*</p></span>
+  <textarea
+    #input
+    type="text"
+    class="form-control esign-form-control"
+    [(ngModel)]="value"
+    [class.required]="isRequired"
+    [disabled]="isDisabled ? true : null"
+    (keyup)="onValueChange($event)"
+    rows="rows"
+    [attr.placeholder]="placeholder"
+    [ngStyle]="style"
+    [ngClass]="{'backgroundColor': value !== '' && setColor}"
+  >
+  </textarea>
+</div>

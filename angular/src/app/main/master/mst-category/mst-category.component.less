@@ -1,0 +1,220 @@
+@radius: 20px;
+
+:host ::ng-deep {
+    .e-float-input .e-control-wrapper .e-input-group .e-filled {
+        .e-float-text .e-label-bottom {
+            font-weight: 500;
+        }
+    }
+
+    .e-input-group:not(.e-success):not(.e-warning):not(.e-error),
+    .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error) {
+        border-color: #e5e3e1;
+    }
+
+    .e-float-input.e-input-group input,
+    .e-float-input.e-input-group textarea,
+    .e-float-input.e-input-group.e-control-wrapper input {
+        height: 32px;
+    }
+
+    .e-btn {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    .e-dialog .e-btn.e-dlg-closeicon-btn:hover, .e-dialog .e-btn.e-dlg-closeicon-btn:focus, .e-dialog .e-btn.e-dlg-closeicon-btn:active {
+        border-radius: 50%;
+    }
+    .e-dialog .e-dlg-header-content .e-btn.e-dlg-closeicon-btn {
+        padding: 4px 4px;
+        left: 10px;
+    }
+    .e-btn .e-btn-icon {
+        font-size: 15px;
+    }
+}
+
+::ng-deep {
+    #createOrEditCategory .input-group-text.left-text {
+        min-width: 130px;
+    }
+
+    .checkbox-text {
+        min-width: 130px;
+    }
+    esign-category #overviewgrid {
+        height: calc(100vh - 300px);
+        .e-gridcontent {
+            height: calc(100% - 75.6px);
+            .e-content {
+                height: 100% !important;
+            }
+        }
+    }
+}
+
+.master-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 80px);
+
+    .grid-parent {
+        margin: 0px 10px 0px 10px;
+        z-index: 0;
+        position: relative;
+
+        ejs-grid {
+            bottom: 0;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 20px 50px -20px, rgba(0, 0, 0, 0.3) 0px 10px 20px -30px;
+        }
+
+        .control-section {
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 10px;
+
+            .form-filter {
+                border-radius: 5px;
+                background-color: transparent;
+                align-items: center;
+                padding: 10px;
+
+                .input-filter {
+                    margin-right: 10px;
+
+                    ejs-textbox {
+                        .e-float-input .e-control-wrapper .e-input-group .e-filled {
+                            border: 1px solid gray;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.e-gridheader {
+    padding-right: 0px !important;
+}
+
+.e-columnheader {
+
+    color: #f9fdff;
+
+    th {
+        background-color: #119db1
+    }
+
+}
+
+.button-action {
+    margin-right: 10px;
+}
+
+.e-grid {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.e-btn {
+    box-shadow: 0 0 0 4px #98e5ff33;
+    border-radius: 5px;
+}
+
+.title {
+    font: 600 20px/20px "Roboto", sans-serif;
+    color: #222222;
+}
+
+/* App level styles */
+
+.searchDatas{
+    padding: 10px 10px;
+    color: red;
+    border-radius: 17px;
+    border: 1px solid red;
+    font-weight: bold;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.searchDatas:hover{
+    background-color: red;
+    color: white;
+}
+
+.refreshDatas{
+    padding: 10px 10px;
+    color: rgb(62, 96, 230);
+    border-radius: 17px;
+    border: 1px solid rgb(62, 96, 230);
+    font-weight: bold;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.refreshDatas:hover{
+    background-color:rgb(62, 96, 230);
+    color: white;
+}
+
+.createdata{ 
+    padding: 5px 5px;
+    color: rgb(27, 176, 30);
+    border-radius: 17px;
+    border: 1px solid rgb(27, 176, 30);
+    font-weight: bold;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.createdata:hover{
+    background-color:rgb(27, 176, 30);
+    color: white;
+}
+
+.editData{
+    padding: 5px 5px;
+    color: rgb(139, 49, 147);
+    border-radius: 17px;
+    border: 1px solid rgb(139, 49, 147);
+    border-radius: 17px;
+    font-weight: bold;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.editData:hover{
+    background-color:rgb(139, 49, 147);
+    border-radius: 17px;
+    color: white;
+}
+
+.deleteData{
+    padding: 5px 5px;
+    color: rgb(246, 12, 12);
+    border-radius: 17px;
+    border: 1px solid rgb(246, 12, 12);
+    font-weight: bold;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.deleteData:hover{
+    background-color:rgb(246, 12, 12);
+    color: white;
+}
+
+.ExportExcelData{
+    padding: 5px 5px;
+    color: rgb(0, 0, 0);
+    border-radius: 17px;
+    border: 1px solid rgb(0,0,0);
+    font-weight: bold;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.ExportExcelData:hover{
+    background-color:rgb(0,0,0);
+    color: white;
+}
+.inputText{
+    padding: 10px 10px;
+    border-radius: 5px;
+    height: max-content;
+}

@@ -1,0 +1,27 @@
+<div class="input-group">
+    <span class="input-group-text btn left-text" *ngIf="text" >{{ text }}<p *ngIf="isValidate" style="color: var(--toyota-color-red); margin: 0.2rem 0 0.2rem 0.5rem;">*</p></span>
+    <input
+        [type]="type"
+        class="form-control esign-form-control"
+        #input
+        [readonly]="isReadonly"
+        (keyup)="changeValue($event)"
+        [value]="value"
+        [disabled]="isDisabled ? true: null"
+        [class.required]="isRequired"
+        [class.disabled]="isDisabled"
+        [attr.placeholder]="placeholder"
+        (paste)="paste($event)"
+        [attr.maxlength]="maxLength ? maxLength : 999"
+    >
+
+    <span *ngIf="showSearch" class="input-group-text right-text button-search"
+        style="padding: 0px; width: 5%; border: 0.5px solid #7981dc; cursor: pointer;" (click)="btnSearch()"><i
+            class="fa esign-fa fa-search" style="color: #5969e4;"></i>
+    </span>
+    <span *ngIf="showTrash" class="input-group-text right-text" (click)="refresh()"><i
+            class="esign-fa far fa-trash-alt"></i></span>
+    <span *ngIf="showModal" (click)="onClickInputValue($event)" class="input-group-text right-text"><i
+            class="fa esign-fa fas fa-external-link-alt"></i></span>
+</div>
+
