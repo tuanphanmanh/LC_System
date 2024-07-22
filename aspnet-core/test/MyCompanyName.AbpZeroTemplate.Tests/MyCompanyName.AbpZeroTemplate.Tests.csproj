@@ -23,6 +23,9 @@
     <PackageReference Include="EPPlus" Version="7.2.1" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="EPPlus.Interfaces" Version="6.1.1" />
+    <PackageReference Include="FastMember" Version="1.5.0" />
+    <PackageReference Include="GemBox.Document" Version="35.0.1817" />
+    <PackageReference Include="GemBox.Spreadsheet" Version="49.0.1767" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="NPOI.Template" Version="1.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.6">
