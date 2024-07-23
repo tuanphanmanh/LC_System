@@ -4,6 +4,8 @@ import { MstCategoryComponent } from './mst-category.component';
 import { MstCategoryRoutingModule } from './mst-category-routing.module';
 import { UtilsModule } from "../../../../shared/utils/utils.module";
 import { AppComponent } from '@app/app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,22 +14,12 @@ import { AppComponent } from '@app/app.component';
   imports: [
     CommonModule,
     MstCategoryRoutingModule,
-    UtilsModule
+    UtilsModule,
+    BrowserModule,
+    FormsModule  
 ],
    bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MstCategoryModule { }
    
-
-
-// @NgModule({
-//   declarations: [
-//    ],
-//   imports: [
-//    ], 
-//   providers: [
-//    ],
-//   bootstrap: [AppComponent],
-//   schemas: [CUSTOM_ELEMENTS_SCHEMA]
-// })

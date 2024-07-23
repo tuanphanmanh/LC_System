@@ -5,6 +5,7 @@ using Abp.EntityFrameworkCore;
 using Abp.Linq.Extensions;
 using Abp.UI;
 using AutoMapper.Internal.Mappers;
+using GemBox.Spreadsheet;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using tmss.Common;
 
 namespace MyCompanyName.AbpZeroTemplate.Master
 {
@@ -37,6 +39,7 @@ namespace MyCompanyName.AbpZeroTemplate.Master
         {
             var result = from c in _categoryRepo.GetAll().AsNoTracking()
                                 .Where(p => string.IsNullOrWhiteSpace(input.FilterText) || p.Name.Contains(input.FilterText))
+                                orderby c.Name
                          select new SearchCatagoryOutputDto()
                          {
                              Id = c.Id,
@@ -95,6 +98,46 @@ namespace MyCompanyName.AbpZeroTemplate.Master
             {
                 throw new UserFriendlyException("Can not find category for delete");
             }
+        }
+
+        public async Task<byte[]> MstNpuBrandExportExcel(InputMstLCCategoryExportDto input)
+        {
+            var brandList = from item in _categoryRepo.GetAll().AsNoTracking()
+                            where ((string.IsNullOrWhiteSpace(input.CategoryCode) || item.Name.Contains(input.CategoryCode)))
+                            select new SearchCatagoryOutputDto
+                            {
+                                Id = item.Id,
+                                Name = item.Name,
+                            };
+            var result = brandList.ToList();
+            SpreadsheetInfo.SetLicense("EF21-1FW1-HWZF-CLQH");
+            var xlWorkBook = new ExcelFile();
+            var v_worksheet = xlWorkBook.Worksheets.Add("Book1");
+
+            var v_list_export_excel = result.ToList();
+            List<string> list = new List<string>();
+            list.Add("CharacteristicsValue");
+            list.Add("CharacteristicsValueDescription");
+            list.Add("ManufPlanName");
+            list.Add("ProductGroupName");
+
+            List<string> listHeader = new List<string>();
+            listHeader.Add("Characteristics Value");
+            listHeader.Add("Characteristics Value Description");
+            listHeader.Add("Manuf Plan Name");
+            listHeader.Add("Product Group Name");
+
+            string[] properties = list.ToArray();
+            string[] p_header = listHeader.ToArray();
+            Commons.FillExcel(v_list_export_excel, v_worksheet, 1, 0, properties, p_header);
+
+            var tempFile = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".xlsx");
+            xlWorkBook.Save(tempFile);
+            var tempFile2 = Commons.SetAutoFit(tempFile, p_header.Length);
+            byte[] fileByte = await File.ReadAllBytesAsync(tempFile2);
+            File.Delete(tempFile);
+            File.Delete(tempFile2);
+            return fileByte;
         }
     }
 }
